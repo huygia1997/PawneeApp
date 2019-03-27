@@ -1,0 +1,99 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.RegisterShop" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Title" showFooter="true">
+				<customHeader>
+					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+						<contentLeft>
+							<Title text="{i18n>title_becomeShopPage}" class="title_user" width="100%"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					<VBox class="registerShop-container">
+						<f:Form editable="true" class="custom-form-register">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="2"
+									emptySpanM="1" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" columnsS="1" singleContainerFullSize="false"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer>
+									<f:formElements>
+										<f:FormElement>
+											<f:label>
+												<Label required="true" text="{i18n>lbl_register_email}"/>
+											</f:label>
+											<f:fields>
+												<Input change="validateEmail" id="emailRegister" type="Email" value="{modelRegister>/email}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement>
+											<f:label>
+												<Label required="true" text="{i18n>lbl_register_shopName}"/>
+											</f:label>
+											<f:fields>
+												<Input change="handleUserInput" id="ip_shopname" type="Text" value="{modelRegister>/shopName}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement>
+											<f:label>
+												<Label required="true" text="{i18n>lbl_register_phone}"/>
+											</f:label>
+											<f:fields>
+												<Input change="validatePhone" id="ip_phone" type="Tel" value="{modelRegister>/phone}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement>
+											<f:label>
+												<Label required="true" text="{i18n>lbl_register_city_distric}"/>
+											</f:label>
+											<f:fields>
+												<Select class="field_select" width="50%" forceSelection="false" 
+													change="onChangeCity" selectedKey="{dataCity>/selectedCity}" id="filterCity"
+													items="{ path: 'dataCity>/results', templateShareable: false }">
+													<items>
+														<core:Item key="{dataCity>id}" text="{dataCity>cityName}"/>
+													</items>
+												</Select>
+												<Select class="field_select" width="50%" id="filterDistrict" selectItemId="{dataDis>id}" items="{dataDis>/results}">
+													<core:Item key="{dataDis>id}" text="{dataDis>districtName}"/>
+												</Select>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement>
+											<f:label>
+												<Label required="true" text="{i18n>lbl_register_address}"/>
+											</f:label>
+											<f:fields>
+												<Input id="ip_address" value="{modelRegister>/address}" change="getLocationFromInput" type="Text"
+													placeholder="{i18n>input_register_address}"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+						<VBox class="registerShop-footer">
+							<Text class="grey-text" text="{i18n>register_guild}"/>
+							<HBox id="map_canvas" fitContainer="true" justifyContent="Center" alignItems="Center" class="custom-map-register"></HBox>
+							<Text class="grey-text" text="{i18n>register_policy}"/>
+							<Button busy="{= ${loginResult>/isLogging} ? true : false}" class="btn-findmore registerShop-sizeBtn" text="{i18n>btn_register_shop}"
+								press="registerShop"/>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

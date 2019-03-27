@@ -1,0 +1,72 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mortgage-App.controller.Home"
+	height="100%">
+	<App id="app">
+		<pages>
+			<Page backgroundDesign="Transparent" id="__page2" showSubHeader="false">
+				<customHeader>
+					<Bar id="__bar1">
+						<contentLeft>
+							<Button text="{i18n>btn_cam_do}" width="45%" class="btn_header" press="navToSearchFilterShop"/>
+							<Button text="{i18n>btn_thanh_ly}" width="45%" class="btn_header" press="navToSearchFilterItem" />
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					<Carousel showPageIndicator="true" loop="true" pages="{oModelShop>/results}" showBusyIndicator="false" id="__carousel0" height="40%">
+						<pages>
+							<VBox class="listShop">
+								<Image class="listShop_image" src="{oModelShop>avaURL}"/>
+								<HBox class="listShop_content">
+									<Title text="{oModelShop>shopName}" class="listShop_title"/>
+									<Text text="{oModelShop>fullAddress}" class="listShop_text"/>
+									<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter" value="{oModelShop>rating}" displayOnly="true"
+										tooltip="Rating Tooltip"/>
+								</HBox>
+							</VBox>
+						</pages>
+					</Carousel>
+					<List id="ShopList" headerText="{i18n>title_shop}" items="{oModelShop>/results}" class="shopList_container">
+						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
+							<HBox>
+								<Image src="{oModelShop>avaURL}" class="listShopItem_image"/>
+								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+									<Title text="{oModelShop>shopName}" class="listShopItem_title"/>
+									<Text text="{oModelShop>fullAddress}" class="listShopItem_address"/>
+									<RatingIndicator id="RI" maxValue="5" class="sapUiSmallMarginBottom fixCenter" value="{oModelShop>rating}" displayOnly="true"
+										tooltip="Rating Tooltip"/>
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+					<Link text="{i18n>link_showAll}" press="navToSearchFilterShop" class="linkNavTo"/>
+					<VBox class="box_registerShop">
+						<Title class="title_registerShop" text="{i18n>title_becomeShop}" />
+						<Button class="btn_registerShop" text="{i18n>btn_becomeShop}" press="navToRegisterShop" />
+					</VBox>
+					<List id="SaleItemList" headerText="{i18n>title_saleItem}" items="{oModelSaleItem>/results}" class="listSaleItem_container">
+						<CustomListItem type="Navigation" press="selectSaleItem" class="listSaleItem">
+							<HBox>
+								<VBox>
+									<Image src="{oModelSaleItem>picUrl}" class="listSaleItem_image"/>
+									<Title text="{oModelSaleItem>itemName}" class="listSaleItem_title"/>
+									<Text text="{oModelSaleItem>price}" class="listSaleItem_address"/>
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+					<Link text="{i18n>link_showAll}" press="navToSaleItem" class="linkNavTo"/>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

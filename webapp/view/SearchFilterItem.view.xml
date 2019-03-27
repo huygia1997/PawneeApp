@@ -1,0 +1,46 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.SearchFilterItem" xmlns:fb="sap.ui.comp.filterbar">
+	<App>
+		<pages>
+			<Page title="Title" showFooter="false" enableScrolling="false" class="page_container">
+				<customHeader>
+					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="btnBackHome"/>
+							<Button text="{i18n>btn_cam_do}" width="45%" id="__button0" class="btn_header" press="navToSearchFilterShop"/>
+							<Button text="{i18n>btn_thanh_ly}" width="45%" id="__button1" class="btn_header font_weight"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<Select width="50%" forceSelection="false" change="onChangeSort" selectedKey="1" id="filterSort">
+						<items>
+							<core:Item key="1" text="{i18n>select_all}"/>
+							<core:Item key="4" text="{i18n>select_newItem}"/>
+							<core:Item key="2" text="{i18n>select_priceDes}"/>
+							<core:Item key="3" text="{i18n>select_priceAsc}"/>
+							<core:Item key="6" text="{i18n>select_view}"/>
+							<core:Item key="5" text="{i18n>select_like}"/>
+						</items>
+					</Select>
+					<VBox class="box_title_location">
+						<Title text="{i18n>title_items}" class="title_listShop"/>
+					</VBox>
+					<List id="ShopList" items="{oModelItem>/results}" class="shopList_container">
+						<CustomListItem type="Navigation" press="navToItemDetail" class="listShopItem">
+							<HBox>
+								<Image src="{oModelItem>picUrl}" class="listShopItem_image"/>
+								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+									<Title text="{oModelItem>itemName}" class="listShopItem_title"/>
+									<Text text="{oModelItem>liquidationDate}" class="listShopItem_address"/>
+									<Text text="{oModelItem>price} VNĐ" class="listShopItem_address"/>
+									<Text text="{oModelItem>viewCount} lượt xem" class="listShopItem_address"/>
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

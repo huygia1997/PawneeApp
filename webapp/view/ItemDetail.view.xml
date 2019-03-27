@@ -1,0 +1,36 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.ItemDetail" xmlns:fb="sap.ui.comp.filterbar">
+	<App>
+		<pages>
+			<Page title="Title" class="page_container">
+				<customHeader>
+					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="back"/>
+							<Button text="{i18n>btn_thanh_ly}" width="45%" id="__button1" class="btn_header"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<VBox>
+						<Image src="{oModelItem>/avaUrl}" class="shopDetail-image"/>
+						<Button text="{i18n>lb_interested}" press="interestedShop" class="btn_favorite"/>
+						<VBox class="info-shopdetail">
+							<Label text="{i18n>lb_item}"/>
+							<Title text="{oModelItem>/name}" class="customShop_title customShop_store"/>
+							<Label text="{i18n>lb_price}" class="customTextShop_address"/>
+							<Title text="{oModelItem>/price}" class="customShop_title customShop_store"/>
+							<Label text="{i18n>lb_view}" class="customTextShop_address"/>
+							<Text text="{oModelItem>/view}" class="customTextShop_policy"/>
+							<Title text="{i18n>title_category_item}" class="customTextShop_address customShop_store"/>
+							<VBox class="box_category_item">
+								<Image class="categoy_image_item" src="{oModelItem>/catePic}"/>
+								<Title text="{oModelItem>/cateName}" class="category_text_item"/>
+							</VBox>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

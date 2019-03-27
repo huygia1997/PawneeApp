@@ -1,0 +1,54 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.ShopDetail" xmlns:l="sap.ui.layout">
+	<App>
+		<pages>
+			<Page title="Title" showFooter="true">
+				<customHeader>
+					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="back"/>
+							<Button text="{i18n>btn_cam_do}" width="45%" id="__button0" class="btn_header" press="navToSearchFilterShop"/>
+							<Button text="{i18n>btn_thanh_ly}" width="45%" id="__button1" class="btn_header"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					<VBox>
+						<Image src="{dataShopDetail>/avaUrl}" class="shopDetail-image"/>
+						<Button text="{i18n>lb_interested}" press="interestedShop" class="btn_favorite"/>
+						<VBox class="info-shopdetail">
+							<Label text="{i18n>lb_store}" class="customShop_store"/>
+							<Title text="{dataShopDetail>/shopName}" class="customShop_title"/>
+							<Label text="{dataShopDetail>/fullAddress}" class="customTextShop_address"/>
+							<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter customTextShop" value="{dataShopDetail>/rating}"
+								tooltip="Rating Tooltip" displayOnly="true"/>
+							<Text text="{dataShopDetail>/policy}" class="customTextShop_policy"/>
+							<Title text="{i18n>title_category}" class="customShop_title_category"/>
+							<List id="ShortProductList" items="{cateItem>/results}" class="listCategory-container">
+								<CustomListItem>
+									<VBox class="box_category">
+										<Image class="categoy_image" src="{cateItem>iconUrl}"/>
+										<Title text="{cateItem>categoryName}" class="category_text"/>
+									</VBox>
+								</CustomListItem>
+							</List>
+						</VBox>
+						<VBox class="box-btn-and-map">
+							<HBox id="map" class="custom-map-shopinfo" height="1000px" fitContainer="true" justifyContent="Center" alignItems="Center"></HBox>
+						</VBox>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

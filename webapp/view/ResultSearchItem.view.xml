@@ -1,0 +1,41 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.ResultSearchItem">
+	<App xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__app0" backgroundColor="white">
+		<pages>
+			<Page id="__page2" showSubHeader="false">
+				<customHeader>
+					<Bar id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="back"/>
+							<Title text="{i18n>title_search}" class="title_user" width="90%"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					<SearchField class="field_search" id="searchField" search="onSearch" placeholder="{i18n>content_search_field}"/>
+					<List id="ShopList" headerText="{i18n>title_results}" items="{oModelItem>/results}" class="shopList_container">
+						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
+							<HBox>
+								<Image src="{oModelItem>picUrl}" class="listShopItem_image"/>
+								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+									<Title text="{oModelItem>itemName}" class="listShopItem_title"/>
+									<Text text="{oModelItem>price} VND" class="listShopItem_price"/>
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

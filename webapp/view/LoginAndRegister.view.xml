@@ -1,0 +1,29 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mortgage-App.controller.LoginAndRegister" height="100%">
+	<App id="app">
+		<Page class="page_login">
+			<customHeader>
+				<Bar id="__bar1">
+					<contentLeft>
+						<Button icon="sap-icon://nav-back" width="10%" class="back" press="navToLoginPage"/>
+					</contentLeft>
+				</Bar>
+			</customHeader>
+			<VBox class="container_login">
+				<Image src="./images/logo.jpg"/>
+				<Button text="{i18n>btn_register}" class="btn_register config_btn" press="navToRegister"/>
+				<Button text="{i18n>btn_login}" class="btn_login config_btn" press="navToLogin"/>
+			</VBox>
+			<footer>
+				<Bar id="__bar2" design="Footer">
+					<contentLeft>
+						<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+						<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+						<Button icon="sap-icon://bell" press="btnNoti" width="25%"/>
+						<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+					</contentLeft>
+				</Bar>
+			</footer>
+		</Page>
+	</App>
+</mvc:View>

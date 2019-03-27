@@ -1,0 +1,42 @@
+[
+	{
+		"id": 2,
+		"shopName": "ThinhShop",
+		"phoneNumber": "987654321",
+		"facebook": "https://www.facebook.com/bui.thinh.395",
+		"email": "thinhbui@gmail.com",
+		"status": 2,
+		"rating": 4,
+		"policy": 5,
+		"latitude": "10.845050",
+		"longtitude": "106.629650",
+		"fullAddress": "12A Hương Giang, Nha Trang, Khánh Hòa",
+		"avaURL": "https://www.sporta.vn/assets/default_venue_2_thumb-d99ddb967aa09cfaa59665023ac2df740f69adf72552fbfe3e529f010ec106b5.jpg"
+	}, {
+		"id": 3,
+		"shopName": "HuyShop",
+		"phoneNumber": "541236987",
+		"facebook": "https://www.facebook.com/giahuy.truong.773",
+		"email": "huygia@gmail.com",
+		"status": 2,
+		"rating": 5,
+		"policy": 5,
+		"latitude": "10.846810",
+		"longtitude": "106.641590",
+		"fullAddress": "311 Hoàng Sa, Quận 1, Hồ Chí Minh",
+		"avaURL": "https://www.sporta.vn/assets/default_venue_2_thumb-d99ddb967aa09cfaa59665023ac2df740f69adf72552fbfe3e529f010ec106b5.jpg"
+	}, {
+		"id": 1,
+		"shopName": "LAPSHOP",
+		"phoneNumber": "123456789",
+		"facebook": "https://www.facebook.com/luxifer.bepiglet",
+		"email": "ooluxiferoo",
+		"status": 2,
+		"rating": 3,
+		"policy": 5,
+		"latitude": "10.849480",
+		"longtitude": "106.636421",
+		"fullAddress": "78H/1 Hương Lộ 2, Quận Bình Tân, Hồ Chí Minh",
+		"avaURL": "https://kenh14cdn.com/2019/1/16/hoatran-7222-15476569290391575146955.jpg"
+	}
+]

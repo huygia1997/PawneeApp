@@ -1,0 +1,19 @@
+[
+	{
+		"id": 3,
+		"cityName": "Hồ Chí Minh",
+		"description": null
+	}, {
+		"id": 1,
+		"cityName": "Bình Dương",
+		"description": null
+	}, {
+		"id": 2,
+		"cityName": "Đồng Nai",
+		"description": null
+	}, {
+		"id": 4,
+		"cityName": "Bà Rịa - Vũng Tàu",
+		"description": null
+	}
+]

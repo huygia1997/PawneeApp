@@ -1,0 +1,113 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.UserDetail" xmlns:u="sap.ui.unified">
+	<App xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__app0" backgroundColor="white">
+		<pages>
+			<Page id="__page2" showSubHeader="false">
+				<customHeader>
+					<Bar id="__bar1">
+						<contentLeft>
+							<Title text="{i18n>title_userDetail}" class="title_user" width="100%"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					<IconTabBar expandable="false" expanded="true" id="idIconTabBarSeparatorNoIcon" class="sapUiResponsiveContentPadding">
+						<items>
+							<IconTabFilter icon="sap-icon://hint" iconColor="Positive" text="{i18n>info_user}">
+								<VBox class="container_userInfo">
+									<HBox class="box_image_userInfo">
+										<Image class="img_userInfo" id="img_user" src="{dataUser>/avaURL}"/>
+										<u:FileUploader iconOnly="true" multiple="false" buttonOnly="true" icon="sap-icon://add-photo" uploadOnChange="false" useMultipart="false"
+											fileType="JPG,JPEG,jpeg,jpg,PNG,png" sameFilenameAllowed="true" typeMissmatch="onTypeMissmatch" change="onUploadPress"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>info_username}" class="label_info"/>
+										<Input id="nameInput" type="Text" value="{dataUser>/name}" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Label class="label_info" text="{i18n>lb_email_detail}"/>
+										<Input editable="false" id="emailInput" type="Email" value="{dataUser>/email}" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Label class="label_info" text="{i18n>lb_phone_detail}"/>
+										<Input id="phoneInput" type="Tel" value="{dataUser>/phone}" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Label class="label_info" text="{i18n>lb_address_detail}"/>
+										<Input id="addressInput" type="Text" value="{dataUser>/address}" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Button press="updateUserInfo" text="{i18n>update_userInfo}" width="135px" class="btn_login config_btn margin_btn"/>
+										<Button press="logout" text="{i18n>logout_account}" width="135px" class="btn_register config_btn margin_btn"/>
+									</HBox>
+								</VBox>
+							</IconTabFilter>
+							<IconTabSeparator icon=""/>
+							<IconTabFilter icon="sap-icon://bell" text="{i18n>tab_notify}" iconColor="Negative">
+								<List id="ShortProductList" items="{dataNotify>/results}">
+									<StandardListItem title="{dataNotify>message}" description="{dataNotify>createTime}" iconDensityAware="false" type="Navigation"
+										iconInset="false" press="selectShop"/>
+								</List>
+							</IconTabFilter>
+							<IconTabFilter icon="sap-icon://notes" text="{i18n>tab_transaction}">
+								<Table items="{dataTrans>/results}">
+									<columns>
+										<Column>
+											<Label text="{i18n>cl_itemName}"/>
+										</Column>
+										<Column>
+											<Label text="{i18n>cl_startDate}"/>
+										</Column>
+										<Column>
+											<Label text="{i18n>cl_status}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem press="onTransDetailPress" type="Active">
+											<cells>
+												<Text text="{dataTrans>itemName}"/>
+												<Text text="{dataTrans>startDate}"/>
+												<ObjectStatus text="{= ${dataTrans>status} === 1 ? ${i18n>status_active} : ${i18n>status_locked} }"
+													state="{ path: 'dataTrans>status/id', formatter: '.formatter.transStatusState' }"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</IconTabFilter>
+							<IconTabSeparator icon=""/>
+							<IconTabFilter icon="sap-icon://unlocked" iconColor="Negative" text="{i18n>tab_forgetPassword}">
+								<VBox class="container_userInfo">
+									<HBox>
+										<Label text="{i18n>lb_old_password}" class="label_info"/>
+										<Input id="oldPassword" type="Text" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_new_password}" class="label_info"/>
+										<Input id="newPassword" type="Text" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_reNew_password}" class="label_info"/>
+										<Input id="reNewPassword" type="Text" class="input_info"/>
+									</HBox>
+									<HBox>
+										<Button text="{i18n>update_passwordUser}" width="135px" class="btn_login config_btn margin_btn"/>
+									</HBox>
+								</VBox>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.SearchItem">
+	<App xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__app0" backgroundColor="white">
+		<pages>
+			<Page id="__page2" showSubHeader="false">
+				<customHeader>
+					<Bar id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="btnBackHome"/>
+							<Button text="{i18n>btn_cam_do}" width="45%" class="btn_header" press="navToSearchShop"/>
+							<Button text="{i18n>btn_thanh_ly}" width="45%" class="btn_header"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					<SearchField class="field_search" id="searchField" search="onSearch" placeholder="{i18n>content_searchItem_field}"/>
+					<VBox class="container_keyword">
+						<Title text="{i18n>title_best_keyword}" class="title_best_keyword"/>
+						<Label text="{i18n>content_best_keyword}" class="content_best_keyword"/>
+						<HBox class="box_tags">
+							<Link text="honda" press="navToResultKeyword" class="tag_best_search"/>
+							<Link text="iphone" press="navToResultKeyword" class="tag_best_search"/>
+						</HBox>
+					</VBox>
+					<VBox class="container_keyword">
+						<Title text="{i18n>title_was_search}" class="title_best_keyword"/>
+						<Label text="{i18n>content_was_search}" class="content_best_keyword"/>
+						<List id="ListWasSearch" items="{keyword>/results}" class="list_wasSearch">
+							<CustomListItem type="Navigation" press="navToResultKeyword" >
+								<Link text="{keyword>}" press="navToResultKeyword" class="tag_best_search"/>
+							</CustomListItem>
+						</List>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

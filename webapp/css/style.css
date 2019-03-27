@@ -1,0 +1,517 @@
+/* Enter your custom styles here */
+
+.sapMITBScrollContainer {
+    text-align: center;
+}
+.sapMShellBrandingBar {
+    height: 0px;
+}
+.sapMPageHeader::before {
+    border-top-width: 0rem;
+}
+#__xmlview0--__app1--__list0-listUl {
+    display: inline-block !important;
+}
+.sapMCrslPrev,
+.sapMCrslNext {
+    display: none;
+}
+.listShop {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.listShop_content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    display: inline-block;
+    width: 100%;
+    margin: 0 15px;
+}
+.listShop_image {
+    position: absolute;
+    width: 100%;
+    height: inherit;
+}
+.listShopItem_address {
+    font-size: 12px;
+}
+.listShop_title {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    background: Transparent !important;
+    color: #fff;
+}
+.listShop_text {
+    color: #fff;
+    font-size: 12px;
+}
+.sapMIBar.sapMHeader-CTX {
+    background-color: #3f5161;
+}
+.sapMIBar-CTX .sapMBtn:hover>.sapMBtnHoverable:not(.sapMBtnActive) {
+    background-color: transparent;
+}
+.sapUiGlobalBackgroundColor,
+.sapMGlobalBackgroundColor {
+    background-color: #fff !important;
+}
+.btn_header bdi,
+.back span {
+    color: #fff;
+}
+.sapMBtnInner {
+    text-shadow: none;
+}
+.btn_filterShop {
+    margin: 0 10px;
+    background-color: #3f5161;
+}
+.listItemShop {
+    height: 100px;
+}
+.listItemShop .sapMSLITitle {
+    font-weight: bold;
+}
+.shopList_container .sapMListHdrText,
+.listSaleItem_container .sapMListHdrText {
+    color: #50d2e8;
+}
+.listShopItem_image {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.listShopItem_title {
+    font-weight: bold;
+}
+.linkNavTo {
+    margin: 20px;
+}
+.listSaleItem {
+    display: inline-block;
+    width: 50%;
+}
+.listSaleItem_container ul {
+    display: inline-block;
+    width: 100%;
+}
+.listSaleItem_container ul li {
+    padding: 5px;
+}
+.listSaleItem_image {
+    width: 100%;
+    height: 100px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+.sapMLIBImgNav {
+    display: none;
+}
+.listSaleItem_title {
+    font-weight: bold;
+}
+.page_login {
+    position: relative;
+}
+.container_login {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.btn_register {
+    background-color: #f15323;
+}
+.config_btn {
+    width: 200px;
+    margin: 5px;
+    border-radius: 5px;
+}
+.btn_register .sapMBtnInner {
+    background: #f15323;
+    border: none;
+}
+.btn_register:hover>.sapMBtnHoverable {
+    background: #f15323;
+    border: none;
+}
+.config_btn bdi {
+    color: #fff;
+}
+.container_login .sapMFlexItemAlignAuto {
+    margin: 0 auto;
+}
+.btn_login {
+    background-color: #55c6f1;
+}
+.btn_login .sapMBtnInner {
+    background: #55c6f1;
+    border: none;
+}
+.btn_login:hover>.sapMBtnHoverable {
+    background: #55c6f1;
+    border: none;
+}
+html.sap-desktop .sapMBtn:focus>.sapMFocusable {
+    outline: none;
+}
+.container_register {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+.box_register {
+    display: block;
+    margin: 20px 0;
+}
+.btn_register_fragment {
+    width: 100%;
+}
+.btn_facebook {
+    background-color: #29487d;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+.btn_facebook .sapMBtnInner {
+    background: #29487d;
+    border: none;
+}
+.btn_facebook:hover>.sapMBtnHoverable {
+    background: #29487d;
+    border: none;
+}
+.btn_facebook bdi,
+.btn_google bdi {
+    color: #fff;
+}
+.btn_google {
+    background-color: #d93025;
+    border-radius: 7px;
+}
+.btn_google .sapMBtnInner {
+    background: #d93025;
+    border: none;
+}
+.btn_google:hover>.sapMBtnHoverable {
+    background: #d93025;
+    border: none;
+}
+.box_input_register {
+    display: block;
+}
+.field_input {
+    width: 100%;
+}
+.btn_register2 {
+    background: #fff;
+    border-radius: 5px;
+    width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+.btn_register2 .sapMBtnInner {
+    background: #fff;
+    border: 1px solid #bfbfbf;
+}
+.btn_register2:hover>.sapMBtnHoverable {
+    background: #fff;
+    border: 1px solid #bfbfbf;
+}
+.btn-searchByFilter {
+    background: #fff;
+    border-radius: 5px;
+    width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+.btn-searchByFilter .sapMBtnInner {
+    background: #fff;
+    border: 1px solid #bfbfbf;
+}
+.btn-searchByFilter:hover>.sapMBtnHoverable {
+    background: #fff;
+    border: 1px solid #bfbfbf;
+}
+.btn_searchFilter .sapMBtnInner {
+    border: none;
+    border-right: 1px solid #bfbfbf;
+}
+.btn_searchFilter .sapMBtnText>.sapMBtnIcon {
+    left: 15%;
+}
+.title_listShop {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: #50d2e8;
+    font-weight: bold;
+    font-size: 12px;
+}
+.findMoreColor {
+    color: #d93025;
+}
+.box_title_location {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50px;
+}
+.btn_location {
+    position: absolute;
+    right: 10px;
+}
+.btn_location bdi,
+.btn_location .sapMBtnIcon {
+    color: #50d2e8;
+    font-size: 14px;
+}
+.btn_location .sapMBtnInner {
+    background: #fff;
+    border: none;
+}
+.btn_location:hover>.sapMBtnHoverable {
+    background: #fff;
+    border: none;
+}
+.page_container {
+    position: relative;
+}
+.box_sort {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.info-shopdetail {
+    display: inline-block;
+    width: 100%;
+    margin: 10px;
+}
+.grid-custom,
+.grid-custom>div {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.grid-custom {
+    display: inline-block;
+    width: 100%;
+}
+.sapUiRespGridMedia-Std-Phone.sapUiRespGridHSpace2>.sapUiRespGridSpanS10 {
+    width: 100% !important;
+}
+.shopDetail-image {
+    width: 100%;
+    height: 300px;
+}
+.listSaleItem_address {
+    font-size: 12px;
+}
+.custom-map-shopinfo {
+    height: 200px !important;
+}
+.shopDetail-label {
+    font-size: 12px;
+    width: 50px;
+}
+.customShop_title {
+    font-weight: bold;
+    font-size: 16px;
+}
+.customTextShop_address bdi {
+    white-space: normal;
+}
+.customShop_store {
+    margin-bottom: 10px;
+}
+.customShop_title_category {
+    color: #50d2e8;
+    padding: 10px 0;
+}
+.listCategory-container ul {
+    display: inline-block;
+    width: 100%;
+}
+.listCategory-container ul li {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    border-bottom: none;
+}
+.categoy_image {
+    width: 40%;
+}
+.category_text {
+    font-size: 12px;
+}
+.container_keyword {
+    margin: 40px 10px;
+}
+.title_best_keyword {
+    color: #b70a0a;
+    font-weight: bold;
+}
+.content_best_keyword {
+    padding-bottom: 10px;
+}
+.field_search .sapMSFB {
+    display: none !important;
+}
+.tag_best_search {
+    padding-right: 10px;
+}
+.box_tags {
+    display: inline-block;
+}
+.title_user {
+    text-align: center;
+}
+.title_user span {
+    color: #fff;
+}
+.info_user span {
+    font-weight: bold;
+}
+.container_userInfo {
+    padding: 10px;
+}
+.label_info {
+    width: 120px;
+    padding-top: 15px;
+}
+.sapMInputBaseContentWrapper {
+    border: none;
+    border-bottom: 1px solid #bfbfbf;
+}
+.sapMInputBaseContentWrapper:hover:not(.sapMInputBaseContentWrapperState):not(.sapMInputBaseDisabledWrapper):not(.sapMInputBaseReadonlyWrapper) {
+    border: none;
+    border-bottom: 1px solid #bfbfbf;
+}
+.input_info {
+    width: 240px;
+}
+.margin_btn {
+    margin: 20px 15px;
+}
+.notiBox .sapMSLITitle {
+    white-space: normal;
+}
+.notiBox {
+    height: 100%;
+    padding: 10px;
+}
+.btn_notifications {
+    position: relative;
+}
+.btn_notifications .sapMBtnIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.btn_notifications .sapMBtnContent {
+    position: absolute;
+    top: -20%;
+    left: 65%;
+}
+.list_wasSearch ul {
+    display: inline-block;
+    width: 100%;
+}
+.list_wasSearch ul li {
+    display: inline-block;
+    border-bottom: none;
+}
+.link_forgetPassword {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+.listShopItem_price {
+    color: #b70a0a;
+}
+.font_weight bdi {
+    font-weight: bold;
+}
+.img_userInfo {
+    width: 150px;
+    height: 125px;
+    border-radius: 50%;
+}
+.box_image_userInfo {
+    margin: 0 auto;
+}
+.box_category_item {
+    width: 70px;
+    height: 70px;
+    text-align: center;
+}
+.categoy_image_item {
+    width: 100%;
+}
+.category_text_item {
+    font-size: 12px;
+}
+.category_text_item span {
+    white-space: normal;
+}
+.box_activate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    height: 100px;
+}
+.box_activate div {
+    display: inline-block;
+}
+.text_activate {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+.icon_activate {
+    font-size: 2em;
+}
+.color_unactivate {
+    color: red;
+}
+.color_activate {
+    color: green;
+}
+.box_registerShop {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+}
+.title_registerShop {
+    font-size: 1.5em;
+    white-space: normal !important;
+    color: #f57c00;
+    margin: 10px;
+} 
+.btn_registerShop {
+    background-color: #f15323;
+    border-radius: 5px;
+}
+.btn_registerShop .sapMBtnInner {
+    background: #f15323;
+    border: none;
+}
+.btn_registerShop:hover>.sapMBtnHoverable {
+    background: #f15323;
+    border: none;
+}
+.btn_registerShop bdi {
+	color: #fff;
+}

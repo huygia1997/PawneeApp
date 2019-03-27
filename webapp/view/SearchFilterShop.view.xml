@@ -1,0 +1,46 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.SearchFilterShop" xmlns:fb="sap.ui.comp.filterbar">
+	<App>
+		<pages>
+			<Page title="Title" showFooter="false" enableScrolling="false" class="page_container">
+				<customHeader>
+					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="btnBackHome"/>
+							<Button text="{i18n>btn_cam_do}" width="45%" id="__button0" class="btn_header font_weight" />
+							<Button text="{i18n>btn_thanh_ly}" width="45%" id="__button1" class="btn_header" press="navToSearchFilterItem"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<Select width="50%" forceSelection="false" change="onChangeSort" selectedKey="1" id="filterSort">
+						<items>
+							<core:Item key="1" text="{i18n>select_all}"/>
+							<core:Item key="1" text="{i18n>select_rating}"/>
+							<core:Item key="2" text="{i18n>select_dexuat}"/>
+							<core:Item key="2" text="{i18n>select_view}"/>
+						</items>
+					</Select>
+					<Button class="btn_searchFilter" icon="sap-icon://filter" text="{i18n>btn_filter}" width="50%" press="openDialogFilter"/>
+					<VBox class="box_title_location">
+						<Title text="{i18n>title_shops}" class="title_listShop"/>
+						<Button icon="sap-icon://functional-location" press="navToNearByLocation" text="{i18n>btn_nearByLocation}" class="btn_location"/>
+					</VBox>
+					<List id="ShopList" items="{oModelShop>/results}" class="shopList_container">
+						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
+							<HBox>
+								<Image src="{oModelShop>avaURL}" class="listShopItem_image"/>
+								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+									<Title text="{oModelShop>shopName}" class="listShopItem_title"/>
+									<Text text="{oModelShop>fullAddress}" class="listShopItem_address"/>
+									<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter" value="{oModelShop>rating}" displayOnly="true"
+										tooltip="Rating Tooltip"/>
+								</VBox>
+							</HBox>
+						</CustomListItem>
+					</List>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

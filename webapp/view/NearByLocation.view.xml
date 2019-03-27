@@ -1,0 +1,26 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mortgage-App.controller.NearByLocation">
+	<App>
+		<pages>
+			<Page title="Title" showFooter="false" enableScrolling="false" class="page_container">
+				<customHeader>
+					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" width="10%" class="back" press="back"/>
+							<Button text="{i18n>btn_cam_do}" width="45%" id="__button0" class="btn_header" press="navToSearchFilterShop"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<Button press="findMore" class="btn_searchFilter" icon="sap-icon://sort" text="{i18n>btn_findMore}" width="50%" />
+					<Button press="openDialogFilter" class="btn_searchFilter" icon="sap-icon://filter" text="{i18n>btn_filter}" width="50%"/>
+					<VBox class="box_title_location">
+						<Title text="{titleModel>/title}" class="title_listShop findMoreColor"/>
+						<Button icon="sap-icon://list" press="navToSearchFilterShop" text="{i18n>btn_searchFilterShop}" class="btn_location"/>
+					</VBox>
+					<HBox id="map_canvas" fitContainer="true" justifyContent="Center" alignItems="Center"></HBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "shopName": "LAPSHOP",
+        "phoneNumber": "123456789",
+        "facebook": "https://www.facebook.com/luxifer.bepiglet",
+        "email": "ooluxiferoo",
+        "status": 2,
+        "rating": 3,
+        "policy": 5,
+        "latitude": "10.849480",
+        "longtitude": "106.636421",
+        "fullAddress": "948 Đường Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Việt Nam",
+        "avaURL": "https://www.sporta.vn/assets/default_venue_2_thumb-d99ddb967aa09cfaa59665023ac2df740f69adf72552fbfe3e529f010ec106b5.jpg"
+    },
+    {
+        "id": 2,
+        "shopName": "ThinhShop",
+        "phoneNumber": "987654321",
+        "facebook": "https://www.facebook.com/bui.thinh.395",
+        "email": "thinhbui@gmail.com",
+        "status": 2,
+        "rating": 4,
+        "policy": 5,
+        "latitude": "10.845050",
+        "longtitude": "106.629650",
+        "fullAddress": "948 Đường Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Việt Nam",
+        "avaURL": "https://scontent.fsgn3-1.fna.fbcdn.net/v/t1.0-9/48389741_1458866210924954_6958816960574390272_n.jpg?_nc_cat=111&_nc_oc=AQlJUPcWwnm2hXQUw-drgUFyhfgPCcU4M0Qw9H10xxPF9OUHyTLEJwPAnnWA8M8ExqQ&_nc_ht=scontent.fsgn3-1.fna&oh=86467c9f54ea5f7b41d05c7e006297ae&oe=5D1C5C13"
+    },
+    {
+        "id": 3,
+        "shopName": "HuyShop",
+        "phoneNumber": "541236987",
+        "facebook": "https://www.facebook.com/giahuy.truong.773",
+        "email": "huygia@gmail.com",
+        "status": 2,
+        "rating": 5,
+        "policy": 5,
+        "latitude": "10.846810",
+        "longtitude": "106.641590",
+        "fullAddress": "948 Đường Nguyễn Văn Quá, Đông Hưng Thuận, Quận 12, Hồ Chí Minh, Việt Nam",
+        "avaURL": "https://kenh14cdn.com/2019/1/16/hoatran-7222-15476569290391575146955.jpg"
+    }
+]

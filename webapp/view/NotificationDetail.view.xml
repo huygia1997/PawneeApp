@@ -1,0 +1,29 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mortgage-App.controller.NotificationDetail" height="100%">
+	<App id="app">
+		<pages>
+			<Page backgroundDesign="Transparent" id="__page2" showSubHeader="false">
+				<customHeader>
+					<Bar id="__bar1">
+						<contentLeft>
+							<Title text="{i18n>title_notifyDetail}" class="title_user" width="100%"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<Button icon="sap-icon://home" press="btnBackHome" width="25%"/>
+							<Button icon="sap-icon://search" press="btnSearch" width="25%"/>
+							<Button class="btn_notifications" icon="sap-icon://bell" text="{noti>/count}" press="btnNoti" width="25%"/>
+							<Button icon="sap-icon://user-settings" width="25%" press="navToLoginPage"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+				<content>
+					
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

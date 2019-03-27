@@ -1,0 +1,30 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mortgage-App.controller.LoginPage" height="100%">
+	<App id="app">
+		<Page>
+			<customHeader>
+				<Bar id="__bar1">
+					<contentLeft>
+						<Button icon="sap-icon://nav-back" width="10%" class="back" press="navToLoginPage"/>
+						<Button text="{i18n>btn_login1}" width="45%" class="btn_header" />
+						<Button text="{i18n>btn_register2}" width="45%" class="btn_header" press="openRegisterPage"/>
+					</contentLeft>
+				</Bar>
+			</customHeader>
+			<content>
+				<VBox class="container_register">
+					<HBox class="box_register">
+						<Button text="{i18n>btn_loginByFacebook}" class="btn_register_fragment btn_facebook"/>
+						<Button text="{i18n>btn_loginByGoogle}" class="btn_register_fragment btn_google"/>
+					</HBox>
+					<HBox class="box_input_register">
+						<Input change="validateEmail" id="userName" type="Email" placeholder="{i18n>input_email}" class="input_info" value="{loginModel>/username}"/>
+						<Input id="passwordUser" type="Password" placeholder="{i18n>input_password}" class="input_info" value="{loginModel>/password}"/>
+						<Link text="{i18n>link_forgetPassword}" press="forgetPassword" class="link_forgetPassword" />
+						<Button text="{i18n>btn_login}" press="checkToLogin" class="btn_register2"/>
+					</HBox>
+				</VBox>
+			</content>
+		</Page>
+	</App>
+</mvc:View>

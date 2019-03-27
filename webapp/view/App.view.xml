@@ -1,0 +1,6 @@
+<mvc:View controllerName="Mortgage-App.controller.App" displayBlock="true" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt">
+	<App id="app" class="myApp">
+		
+	</App>
+</mvc:View>
