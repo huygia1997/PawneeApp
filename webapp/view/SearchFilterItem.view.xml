@@ -2,9 +2,9 @@
 	controllerName="Mortgage-App.controller.SearchFilterItem" xmlns:fb="sap.ui.comp.filterbar">
 	<App>
 		<pages>
-			<Page title="Title" showFooter="false" enableScrolling="false" class="page_container">
+			<Page title="Title" class="page_container">
 				<customHeader>
-					<Bar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" id="__bar1">
+					<Bar id="__bar1">
 						<contentLeft>
 							<Button icon="sap-icon://nav-back" width="10%" class="back" press="btnBackHome"/>
 							<Button text="{i18n>btn_cam_do}" width="45%" id="__button0" class="btn_header" press="navToSearchFilterShop"/>
@@ -12,29 +12,57 @@
 						</contentLeft>
 					</Bar>
 				</customHeader>
+				<footer>
+					<Bar id="__bar2" design="Footer">
+						<contentLeft>
+							<VBox width="50%" class="footer_icon_box">
+								<Button icon="sap-icon://crm-service-manager" press="openDialogSort" class="footer_btn"/>
+								<Label text="{i18n>lb_sort}" class="footer_lb"/>
+							</VBox>
+							<VBox width="50%" class="footer_icon_box">
+								<Button icon="sap-icon://detail-view" press="openDialogFilterByCate" class="footer_btn"/>
+								<Label text="{i18n>lb_searchFilter}" class="footer_lb"/>
+							</VBox>
+						</contentLeft>
+					</Bar>
+				</footer>
 				<content>
-					<Select width="50%" forceSelection="false" change="onChangeSort" selectedKey="1" id="filterSort">
-						<items>
-							<core:Item key="1" text="{i18n>select_all}"/>
-							<core:Item key="4" text="{i18n>select_newItem}"/>
-							<core:Item key="2" text="{i18n>select_priceDes}"/>
-							<core:Item key="3" text="{i18n>select_priceAsc}"/>
-							<core:Item key="6" text="{i18n>select_view}"/>
-							<core:Item key="5" text="{i18n>select_like}"/>
-						</items>
-					</Select>
+					<!--<Select width="50%" forceSelection="false" change="onChangeSort" selectedKey="1" id="filterSort">-->
+					<!--	<items>-->
+					<!--		<core:Item key="1" text="{i18n>select_all}"/>-->
+					<!--		<core:Item key="4" text="{i18n>select_newItem}"/>-->
+					<!--		<core:Item key="2" text="{i18n>select_priceDes}"/>-->
+					<!--		<core:Item key="3" text="{i18n>select_priceAsc}"/>-->
+					<!--		<core:Item key="6" text="{i18n>select_view}"/>-->
+					<!--		<core:Item key="5" text="{i18n>select_like}"/>-->
+					<!--	</items>-->
+					<!--</Select>-->
 					<VBox class="box_title_location">
 						<Title text="{i18n>title_items}" class="title_listShop"/>
 					</VBox>
-					<List id="ShopList" items="{oModelItem>/results}" class="shopList_container">
+					<List id="ShopList" items="{oModelItem>/results}" class="shopList_container" growing="true" growingThreshold="7" growingScrollToLoad="true">
 						<CustomListItem type="Navigation" press="navToItemDetail" class="listShopItem">
 							<HBox>
 								<Image src="{oModelItem>picUrl}" class="listShopItem_image"/>
 								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-									<Title text="{oModelItem>itemName}" class="listShopItem_title"/>
-									<Text text="{oModelItem>liquidationDate}" class="listShopItem_address"/>
-									<Text text="{oModelItem>price} VNĐ" class="listShopItem_address"/>
-									<Text text="{oModelItem>viewCount} lượt xem" class="listShopItem_address"/>
+									<HBox>
+										<Label text="{i18n>lb_name_item}"/>
+										<Title text="{oModelItem>itemName}" class="listShopItem_title"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_date_item}"/>
+										<Text
+											text="{ path: 'oModelItem>liquidationDate', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.sss+hhmm' }, pattern: 'dd-MM-yyyy' } }"
+											class="listShopItem_address"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_price_item}"/>
+										<Text text="{oModelItem>price} VNĐ" class="listShopItem_address"/>
+									</HBox>
+									<!--<HBox>-->
+									<!--	<Label text="{i18n>lb_view}" />-->
+									<!--	<Text text="{oModelItem>viewCount} lượt xem" class="listShopItem_address"/>-->
+									<!--</HBox>-->
 								</VBox>
 							</HBox>
 						</CustomListItem>

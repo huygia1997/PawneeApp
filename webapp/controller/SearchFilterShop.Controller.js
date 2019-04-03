@@ -14,6 +14,12 @@ sap.ui.define([
 		 */
 		onInit: function() {
 
+			var oRouter = this.getRouter();
+
+			oRouter.getRoute("searchFilterShop").attachPatternMatched(this._onRouteMatched, this);
+		},
+
+		_onRouteMatched: function() {
 			var oModel = new sap.ui.model.json.JSONModel();
 			this.setModel(oModel, "dataCity");
 
@@ -29,16 +35,20 @@ sap.ui.define([
 			this.getBestShop();
 		},
 
-		_onRouteMatched: function() {
-
-		},
-
 		getDataCategory: function() {
+			var arrayOfHuy = [];
 			var dataCate = models.getDataCategory();
+			var objAll = {
+				categoryName: "Tất cả"
+			};
+			arrayOfHuy.push(objAll);
 			if (dataCate) {
+				for (var i = 0; i < dataCate.length; i++) {
+					arrayOfHuy.push(dataCate[i]);
+				}
 				var oModelCate = new JSONModel();
 				oModelCate.setData({
-					results: dataCate
+					results: arrayOfHuy
 				});
 				this.setModel(oModelCate, "dataCate");
 			}
@@ -100,6 +110,8 @@ sap.ui.define([
 			this.getModel("oModelShop").updateBindings();
 			// check was filter or sort
 			var check = this.getModel("keyOfDialog").getProperty("/isFiltering");
+			// get Model key filter
+			var keyModel = this.getModel("keyOfDialog");
 
 			if (check === 1) {
 				var lat = this.getGlobalModel().getProperty("/lat");
@@ -112,19 +124,31 @@ sap.ui.define([
 					});
 				}
 			} else if (check === 2) {
-				var keyModel = this.getModel("keyOfDialog");
 				var dis = keyModel.getProperty("/keyDis");
 				var cate = keyModel.getProperty("/keyCate");
-				var dataFilterShop = models.getShopByFilter(cate, dis);
+				var dataFilterShop;
+				if (dis && cate) {
+					dataFilterShop = models.getShopByFilter(page, sort, cate, dis);
+				} else {
+					dataFilterShop = models.getShopByFilter(page, sort);
+				}
 				if (dataFilterShop) {
 					var oModelFilterShop = this.getModel("oModelShop");
 					oModelFilterShop.setData({
 						results: dataFilterShop
 					});
 				}
-			} else {
-				var dataSortShop = models.getShopBySort(page, sort);
-				if(dataSortShop) {
+			} else if (check === 3) {
+				var disFilter = keyModel.getProperty("/keyDis");
+				var cateFilter = keyModel.getProperty("/keyCate");
+				var dataSortShop;
+				if (disFilter && cateFilter) {
+					dataSortShop = models.getShopByFilter(page, sort, cateFilter, disFilter);
+				} else {
+					dataSortShop = models.getShopByFilter(page, sort);
+				}
+
+				if (dataSortShop) {
 					var oModelSortShop = this.getModel("oModelShop");
 					oModelSortShop.setData({
 						results: dataSortShop
@@ -169,6 +193,38 @@ sap.ui.define([
 			this._FilterDialog.open();
 		},
 
+		openDialogSort: function() {
+			if (!this._SortDialog) {
+				this._SortDialog = sap.ui.xmlfragment(this.getId(), "Mortgage-App.fragment.SortBox",
+					this);
+				var sortDialogModel = new JSONModel();
+				var getSort = models.getListSortByShop();
+				sortDialogModel.setData({
+					results: getSort
+				});
+				this._SortDialog.setModel(sortDialogModel, "sortResult");
+				//Set models which is belonged to View to Fragment
+				this.getView().addDependent(this._SortDialog);
+			}
+			this._SortDialog.open();
+		},
+
+		selectOptionSort: function(oEvent) {
+			var item = oEvent.getSource();
+			var bindingContext = item.getBindingContext("sortResult");
+			if (bindingContext) {
+				var sortId = bindingContext.getProperty("sortId");
+				if (sortId === 0) {
+					this.getModel("keyOfDialog").setProperty("/isFiltering", 1);
+					this.getBestShop();
+				} else {
+					this.getModel("keyOfDialog").setProperty("/isFiltering", 3);
+					this.getBestShop(0, sortId);
+				}
+				this._SortDialog.close();
+			}
+		},
+
 		searchPlaceByForm: function() {
 			this.getModel("keyOfDialog").setProperty("/isFiltering", 2);
 
@@ -178,30 +234,8 @@ sap.ui.define([
 			this.getModel("keyOfDialog").setProperty("/keyDis", keyDistrics);
 			this.getModel("keyOfDialog").setProperty("/keyCate", keyItem);
 
-			this.getBestShop();
+			this.getBestShop(0, 3);
 			this._FilterDialog.close();
-		},
-
-		onChangeSort: function() {
-			var selectText = this.getView().byId("filterSort").getSelectedItem().getText();
-			switch (selectText) {
-				case "Tất cả":
-					this.getModel("keyOfDialog").setProperty("/isFiltering", 3);
-					this.getBestShop(0, 3);
-					break;
-				case "Xếp hạng":
-					this.getModel("keyOfDialog").setProperty("/isFiltering", 3);
-					this.getBestShop(0, 1);
-					break;
-				case "Đề xuất":
-					this.getModel("keyOfDialog").setProperty("/isFiltering", 1);
-					this.getBestShop();
-					break;
-				case "Lượt xem":
-					this.getModel("keyOfDialog").setProperty("/isFiltering", 3);
-					this.getBestShop(0, 2);
-					break;
-			}
 		},
 
 		/**

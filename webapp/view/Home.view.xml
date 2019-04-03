@@ -7,7 +7,7 @@
 					<Bar id="__bar1">
 						<contentLeft>
 							<Button text="{i18n>btn_cam_do}" width="45%" class="btn_header" press="navToSearchFilterShop"/>
-							<Button text="{i18n>btn_thanh_ly}" width="45%" class="btn_header" press="navToSearchFilterItem" />
+							<Button text="{i18n>btn_thanh_ly}" width="45%" class="btn_header" press="navToSearchFilterItem"/>
 						</contentLeft>
 					</Bar>
 				</customHeader>
@@ -22,13 +22,14 @@
 					</Bar>
 				</footer>
 				<content>
-					<Carousel showPageIndicator="true" loop="true" pages="{oModelShop>/results}" showBusyIndicator="false" id="__carousel0" height="40%">
+					<Carousel showPageIndicator="true" 
+						loop="true" pages="{oModelShop>/results}" showBusyIndicator="false" id="__carousel0" height="40%">
 						<pages>
 							<VBox class="listShop">
-								<Image class="listShop_image" src="{oModelShop>avaURL}"/>
+								<Image class="listShop_image" src="{oModelShop>avatarUrl}"/>
 								<HBox class="listShop_content">
 									<Title text="{oModelShop>shopName}" class="listShop_title"/>
-									<Text text="{oModelShop>fullAddress}" class="listShop_text"/>
+									<Text text="{oModelShop>address/fullAddress}" class="listShop_text"/>
 									<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter" value="{oModelShop>rating}" displayOnly="true"
 										tooltip="Rating Tooltip"/>
 								</HBox>
@@ -38,11 +39,12 @@
 					<List id="ShopList" headerText="{i18n>title_shop}" items="{oModelShop>/results}" class="shopList_container">
 						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
 							<HBox>
-								<Image src="{oModelShop>avaURL}" class="listShopItem_image"/>
+								<Image src="{oModelShop>avatarUrl}" class="listShopItem_image"/>
 								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
 									<Title text="{oModelShop>shopName}" class="listShopItem_title"/>
-									<Text text="{oModelShop>fullAddress}" class="listShopItem_address"/>
-									<RatingIndicator id="RI" maxValue="5" class="sapUiSmallMarginBottom fixCenter" value="{oModelShop>rating}" displayOnly="true"
+									<Text text="{oModelShop>address/fullAddress}" class="listShopItem_address"/>
+									<RatingIndicator id="RI" 
+										maxValue="5" class="sapUiSmallMarginBottom padding_top" value="{oModelShop>rating}" displayOnly="true"
 										tooltip="Rating Tooltip"/>
 								</VBox>
 							</HBox>
@@ -50,16 +52,32 @@
 					</List>
 					<Link text="{i18n>link_showAll}" press="navToSearchFilterShop" class="linkNavTo"/>
 					<VBox class="box_registerShop">
-						<Title class="title_registerShop" text="{i18n>title_becomeShop}" />
-						<Button class="btn_registerShop" text="{i18n>btn_becomeShop}" press="navToRegisterShop" />
+						<Title class="title_registerShop" text="{i18n>title_becomeShop}"/>
+						<Button class="btn_registerShop" text="{i18n>btn_becomeShop}" press="navToRegisterShop"/>
 					</VBox>
 					<List id="SaleItemList" headerText="{i18n>title_saleItem}" items="{oModelSaleItem>/results}" class="listSaleItem_container">
 						<CustomListItem type="Navigation" press="selectSaleItem" class="listSaleItem">
 							<HBox>
 								<VBox>
 									<Image src="{oModelSaleItem>picUrl}" class="listSaleItem_image"/>
-									<Title text="{oModelSaleItem>itemName}" class="listSaleItem_title"/>
-									<Text text="{oModelSaleItem>price}" class="listSaleItem_address"/>
+									<HBox>
+										<Label text="{i18n>lb_name_item}"/>
+										<Title text="{oModelSaleItem>itemName}" class="listSaleItem_title"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_price_item}"/>
+										<Text text="{oModelSaleItem>price} VNĐ" class="listSaleItem_address"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_date_item}"/>
+										<Text
+										text="{ 
+											path: 'oModelSaleItem>liquidationDate', 
+											type: 'sap.ui.model.type.Date', 
+											formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.sss+hhmm' }, pattern: 'dd-MM-yyyy' } 
+										}"
+										class="listShopItem_address"/>
+									</HBox>
 								</VBox>
 							</HBox>
 						</CustomListItem>

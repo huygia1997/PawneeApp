@@ -11,18 +11,9 @@ sap.ui.define([
 
 		onInit: function() {
 			var oRouter = this.getRouter();
-			var oModel = new sap.ui.model.json.JSONModel();
-			this.setModel(oModel, "dataCity");
 
 			var oModelShop = new JSONModel();
 			this.setModel(oModelShop, "oModelShop");
-
-			var keyOfDialog = new sap.ui.model.json.JSONModel({
-				"keyDis": "",
-				"keyCate": "",
-				"isFiltering": false
-			});
-			this.setModel(keyOfDialog, "keyOfDialog");
 
 			this.getView().byId("map_canvas").addStyleClass("myMap");
 			oRouter.getRoute("nearByLocation").attachPatternMatched(this._onRouteMatched, this);
@@ -38,107 +29,17 @@ sap.ui.define([
 		},
 
 		getMyMarker: function(lat, lng) {
-			var checkFilter = this.getModel("keyOfDialog").getProperty("/isFiltering");
-			if (checkFilter === false) {
-				var latLong = new google.maps.LatLng(lat, lng);
-				var currentPos = new google.maps.Marker({
-					position: latLong,
-					map: gMap,
-					icon: {
-						url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-					}
-				});
-				gMap.setZoom(15);
-				gMap.setCenter(currentPos.getPosition());
-			}
-			// else {
-
-			// }
-
-		},
-
-		getDataCategory: function() {
-			var dataCate = models.getDataCategory();
-			if (dataCate) {
-				var oModelCate = new JSONModel();
-				oModelCate.setData({
-					results: dataCate
-				});
-				this.setModel(oModelCate, "dataCate");
-			}
-		},
-
-		getDataCity: function() {
-			//get data city
-			var dataCiti = models.getDataCity();
-			if (dataCiti) {
-				var oModelCiti = this.getModel("dataCity");
-
-				oModelCiti.setProperty("/results", dataCiti);
-				oModelCiti.setProperty("/selectedCity", dataCiti[0].id);
-				oModelCiti.updateBindings();
-			}
-			//get data district
-			var dataDistrict = models.getDataDistrict();
-			if (dataDistrict) {
-				var dataDis = [];
-				for (var i = 0; i < dataDistrict.length; i++) {
-					dataDis.push(dataDistrict[i]);
+			var latLong = new google.maps.LatLng(lat, lng);
+			var currentPos = new google.maps.Marker({
+				position: latLong,
+				map: gMap,
+				icon: {
+					url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
 				}
-
-				var oModelDis = new JSONModel();
-				oModelDis.setData({
-					results: dataDis
-				});
-				this.setModel(oModelDis, "dataDis");
-				this.onChangeCity();
-			}
-		},
-
-		getDistrictByCity: function(cityId) {
-			var filters = [];
-			var cityIdFilter = new sap.ui.model.Filter({
-				path: "cityId",
-				operator: "EQ",
-				value1: cityId
 			});
-			filters.push(cityIdFilter);
-			this.byId("filterDistrict").getBinding("items").filter(filters);
-		},
+			gMap.setZoom(15);
+			gMap.setCenter(currentPos.getPosition());
 
-		onChangeCity: function() {
-			var cityModel = this.getModel("dataCity");
-			if (cityModel) {
-				// var cityContext = this.getView().byId("filterCity").getSelectedItem().getKey();
-				var keyCity = cityModel.getProperty("/selectedCity");
-				this.getDistrictByCity(keyCity);
-			}
-		},
-
-		openDialogFilter: function() {
-			if (!this._FilterDialog) {
-				this._FilterDialog = sap.ui.xmlfragment(this.getId(), "Mortgage-App.fragment.FilterBox",
-					this);
-				var filterDialogModel = new JSONModel();
-				this._FilterDialog.setModel(filterDialogModel, "filterResult");
-				//Set models which is belonged to View to Fragment
-				this.getView().addDependent(this._FilterDialog);
-				/** Get data **/
-				this.getDataCity();
-				this.getDataCategory();
-				/***************************************************/
-			}
-			this._FilterDialog.open();
-		},
-
-		searchPlaceByForm: function() {
-			var keyDistrics = this.getView().byId("filterDistrict").getSelectedItem().getKey();
-			var keyItem = this.getView().byId("filterItem").getSelectedItem().getKey();
-
-			this.getModel("keyOfDialog").setProperty("/keyDis", keyDistrics);
-			this.getModel("keyOfDialog").setProperty("/keyCate", keyItem);
-
-			this._FilterDialog.close();
 		},
 
 		navToSearchFilterShop: function() {
@@ -159,17 +60,21 @@ sap.ui.define([
 			}
 		},
 
-		createLocationShop: function(dataLoca, lat, lng) {
-			for (var i = 0; i < dataLoca.length; i++) {
-				var latShop = dataLoca[i].latitude;
-				var lngShop = dataLoca[i].longtitude;
-				var shopName = dataLoca[i].shopName;
-				var distance = this.calculateDistance(latShop, lngShop, lat, lng);
-				if (distance <= 1000) {
-					this.getPositionOfMarker(latShop, lngShop, shopName);
-					this.getModel("titleModel").setProperty("/title", "Kết quả tìm kiếm 'gần đây 1km'");
-				} else {
-					this.getModel("titleModel").setProperty("/title", "Không có Cửa hàng nào gần 1km");
+		createLocationShop: function(dataLocal, lat, lng) {
+			if (dataLocal !== null) {
+				for (var i = 0; i < dataLocal.length; i++) {
+					var list = dataLocal[i].address;
+					var latShop = list.latitude;
+					var lngShop = list.longtitude;
+
+					var shopName = dataLocal[i].shopName;
+					var distance = this.calculateDistance(latShop, lngShop, lat, lng);
+					if (distance <= 1000) {
+						this.getPositionOfMarker(latShop, lngShop, shopName);
+						this.getModel("titleModel").setProperty("/title", "Kết quả tìm kiếm 'gần đây 1km'");
+					} else {
+						this.getModel("titleModel").setProperty("/title", "Không có Cửa hàng nào gần 1km");
+					}
 				}
 			}
 		},
@@ -185,8 +90,9 @@ sap.ui.define([
 		findMore: function() {
 			count++;
 			for (var i = 0; i < dataLocation.length; i++) {
-				var latShop = dataLocation[i].latitude;
-				var lngShop = dataLocation[i].longtitude;
+				var list = dataLocation[i].address;
+				var latShop = list.latitude;
+				var lngShop = list.longtitude;
 				var shopName = dataLocation[i].shopName;
 				var distance = this.calculateDistance(latShop, lngShop, this.lat, this.lng);
 				if (count == 1) {
@@ -225,12 +131,6 @@ sap.ui.define([
 		toRadians: function(deg) {
 			var pi = Math.PI;
 			return deg * (pi / 180);
-		},
-
-		setAllMarkers: function() {
-			for (var i = 0; i < this.markers.length; i++) {
-				this.markers[i].setMap(gMap);
-			}
 		},
 
 		addMarker: function(position, name) {

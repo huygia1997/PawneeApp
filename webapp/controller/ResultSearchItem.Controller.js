@@ -35,13 +35,13 @@ sap.ui.define([
 			}
 		},
 
-		navToShopDetail: function(oEvent) {
+		navToItemDetail: function(oEvent) {
 			var item = oEvent.getSource();
-			var bindingContext = item.getBindingContext("oModelShop");
+			var bindingContext = item.getBindingContext("oModelItem");
 			if (bindingContext) {
-				var shopId = bindingContext.getProperty("id");
+				var itemId = bindingContext.getProperty("id");
 				this.getRouter().navTo("itemDetail", {
-					shopId: shopId
+					itemId: itemId
 				}, false);
 			}
 		},

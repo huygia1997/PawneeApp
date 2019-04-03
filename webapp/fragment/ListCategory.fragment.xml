@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar">
+	<Dialog title="{i18n>title_sortBox}" afterClose="dialogAfterclose">
+		<content>
+			<List id="ListCategory" items="{listResult>/results}" class="sortList_container">
+				<CustomListItem type="Navigation" press="selectOptionCate" class="listCategory_fragment">
+					<VBox class="list_category_fragment">
+						<Image class="categoy_image" src="{listResult>iconUrl}"/>
+						<Title text="{listResult>categoryName}" class="category_text"/>
+					</VBox>
+				</CustomListItem>
+			</List>
+		</content>
+		<endButton>
+			<Button text="Close" press="onDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

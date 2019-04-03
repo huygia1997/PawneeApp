@@ -104,6 +104,8 @@ sap.ui.define([
 			var oModelNoti = this.getModel("noti");
 			oModelNoti.setProperty("/count", "");
 			oModelNoti.updateBindings(true);
+			
+			MessageBox.success("Đăng xuất thành công!");
 
 			this.getRouter().navTo("home");
 		},

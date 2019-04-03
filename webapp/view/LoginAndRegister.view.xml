@@ -5,7 +5,7 @@
 			<customHeader>
 				<Bar id="__bar1">
 					<contentLeft>
-						<Button icon="sap-icon://nav-back" width="10%" class="back" press="navToLoginPage"/>
+						<Button icon="sap-icon://nav-back" width="10%" class="back" press="back"/>
 					</contentLeft>
 				</Bar>
 			</customHeader>

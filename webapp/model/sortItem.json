@@ -1,0 +1,25 @@
+[{
+	"id": 1,
+	"sortName": "Tất cả",
+	"sortId": 6
+}, {
+	"id": 2,
+	"sortName": "Sản phẩm mới",
+	"sortId": 1
+}, {
+	"id": 3,
+	"sortName": "Giá cao nhất",
+	"sortId": 4
+}, {
+	"id": 4,
+	"sortName": "Giá thấp nhất",
+	"sortId": 5
+}, {
+	"id": 5,
+	"sortName": "Lượt xem",
+	"sortId": 2
+}, {
+	"id": 6,
+	"sortName": "Lượt thích",
+	"sortId": 3
+}]

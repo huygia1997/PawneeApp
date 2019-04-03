@@ -14,19 +14,54 @@
 				<content>
 					<VBox>
 						<Image src="{oModelItem>/avaUrl}" class="shopDetail-image"/>
-						<Button text="{i18n>lb_interested}" press="interestedShop" class="btn_favorite"/>
+						<HBox class="box_btn">
+								<Button id="btn_visible_favorite" visible="{= ${oModelItem>/check} === false }" text="{i18n>lb_interested}" press="interestedItem"
+									class="btn_favorite"/>
+								<Button id="btn_visible_unFavorite" visible="{= ${oModelItem>/check} === true }" text="{i18n>lb_unInterested}" press="unInterestedItem"
+									class="btn_favorite"/>
+								<Button id="btn_shopOfItem" text="{i18n>btn_shopOfItem}" press="openDialogShop" class="btn_rating"/>
+						</HBox>
 						<VBox class="info-shopdetail">
-							<Label text="{i18n>lb_item}"/>
-							<Title text="{oModelItem>/name}" class="customShop_title customShop_store"/>
-							<Label text="{i18n>lb_price}" class="customTextShop_address"/>
-							<Title text="{oModelItem>/price}" class="customShop_title customShop_store"/>
-							<Label text="{i18n>lb_view}" class="customTextShop_address"/>
-							<Text text="{oModelItem>/view}" class="customTextShop_policy"/>
-							<Title text="{i18n>title_category_item}" class="customTextShop_address customShop_store"/>
-							<VBox class="box_category_item">
-								<Image class="categoy_image_item" src="{oModelItem>/catePic}"/>
-								<Title text="{oModelItem>/cateName}" class="category_text_item"/>
-							</VBox>
+							<HBox class="box_padding">
+								<Label text="{i18n>lb_item}" class="customShop_store"/>
+								<Title text="{oModelItem>/name}" class="customShop_title"/>
+							</HBox>
+							<HBox class="box_padding">
+								<Label text="{i18n>lb_price}" class="customShop_store"/>
+								<Title text="{oModelItem>/price} VNĐ" class="customTextShop_address"/>
+							</HBox>
+							<!--<HBox>-->
+							<!--	<Label text="{i18n>lb_phone}" class="customShop_store"/>-->
+							<!--	<Title text="{userOfItem>/phoneNumber}" class="customTextShop_address"/>-->
+							<!--</HBox>-->
+							<HBox id="check_view" class="box_padding">
+								<Label text="{i18n>lb_view}" class="customShop_store"/>
+								<Title text="{oModelItem>/view} lượt xem" class="customTextShop_policy"/>
+							</HBox>
+							<!--<VBox id="check_category" class="category_container">-->
+							<!--	<Title text="{i18n>title_category_item}" class="customShop_title_category"/>-->
+							<!--	<VBox class="box_category_item">-->
+							<!--		<Image class="categoy_image" src="{oModelItem>/catePic}"/>-->
+							<!--		<Title text="{oModelItem>/cateName}" class="category_text"/>-->
+							<!--	</VBox>-->
+							<!--</VBox>-->
+							<HBox class="item_images">
+								<List id="ShortProductList" items="{oModelImages>/results}" class="listCategory-container list_images">
+									<CustomListItem>
+										<Image src="{oModelImages>}">
+											<detailBox>
+												<LightBox>
+													<LightBoxItem imageSrc="{oModelImages>}"/>
+												</LightBox>
+											</detailBox>
+											<!-- Fixes Hbox layout on Android Stock Browser for Android 5.0 -->
+											<layoutData>
+												<FlexItemData growFactor="1" shrinkFactor="0"/>
+											</layoutData>
+										</Image>
+									</CustomListItem>
+								</List>
+							</HBox>
 						</VBox>
 					</VBox>
 				</content>

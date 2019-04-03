@@ -26,10 +26,13 @@
 					<List id="ShopList" headerText="{i18n>title_results}" items="{oModelShop>/results}" class="shopList_container">
 						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
 							<HBox>
-								<Image src="{oModelShop>avaURL}" class="listShopItem_image"/>
+								<Image src="{oModelShop>avatarUrl}" class="listShopItem_image"/>
 								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
 									<Title text="{oModelShop>shopName}" class="listShopItem_title"/>
-									<Text text="{oModelShop>fullAddress}" class="listShopItem_address"/>
+									<Text text="{oModelShop>address/fullAddress}" class="listShopItem_address"/>
+									<RatingIndicator id="RI" 
+										maxValue="5" class="sapUiSmallMarginBottom padding_top" value="{oModelShop>rating}" displayOnly="true"
+										tooltip="Rating Tooltip"/>
 								</VBox>
 							</HBox>
 						</CustomListItem>

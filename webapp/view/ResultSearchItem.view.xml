@@ -24,12 +24,32 @@
 				<content>
 					<SearchField class="field_search" id="searchField" search="onSearch" placeholder="{i18n>content_search_field}"/>
 					<List id="ShopList" headerText="{i18n>title_results}" items="{oModelItem>/results}" class="shopList_container">
-						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
+						<CustomListItem type="Navigation" press="navToItemDetail" class="listShopItem">
 							<HBox>
 								<Image src="{oModelItem>picUrl}" class="listShopItem_image"/>
 								<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-									<Title text="{oModelItem>itemName}" class="listShopItem_title"/>
-									<Text text="{oModelItem>price} VND" class="listShopItem_price"/>
+									<HBox>
+										<Label text="{i18n>lb_name_item}"/>
+										<Title text="{oModelItem>itemName}" class="listShopItem_title"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_date_item}"/>
+										<Text
+										text="{ 
+											path: 'oModelItem>liquidationDate', 
+											type: 'sap.ui.model.type.Date', 
+											formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.sss+hhmm' }, pattern: 'dd-MM-yyyy' } 
+										}"
+										class="listShopItem_address"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_price_item}"/>
+										<Text text="{oModelItem>price} VNĐ" class="listShopItem_address"/>
+									</HBox>
+									<HBox>
+										<Label text="{i18n>lb_view}" />
+										<Text text="{oModelItem>viewCount} lượt xem" class="listShopItem_address"/>
+									</HBox>
 								</VBox>
 							</HBox>
 						</CustomListItem>

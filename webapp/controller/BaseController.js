@@ -12,9 +12,10 @@ sap.ui.define([
 	'sap/ui/core/CustomData',
 	'sap/m/ActionSheet',
 	'sap/m/library',
-	'sap/m/MessageBox'
+	'sap/m/MessageBox',
+	'Mortgage-App/model/models'
 ], function(Controller, UIComponent, Device, JSONModel, BusyDialog, Button, MessageToast, ResponsivePopover, syncStyleClass,
-	NotificationListItem, CustomData, ActionSheet, mobileLibrary, MessageBox) {
+	NotificationListItem, CustomData, ActionSheet, mobileLibrary, MessageBox, models) {
 	"use strict";
 
 	return Controller.extend("Mortgage-App.controller.BaseController", {
@@ -161,7 +162,7 @@ sap.ui.define([
 
 		navToLoginPage: function() {
 			var isLogging = localStorage.getItem("isLogging");
-			if (isLogging) {
+			if (isLogging === "true") {
 				this.getRouter().navTo("userDetail");
 			} else {
 				this.getRouter().navTo("loginAndRegister");
@@ -171,7 +172,7 @@ sap.ui.define([
 		navToSearchFilterItem: function() {
 			this.getRouter().navTo("searchFilterItem");
 		},
-		
+
 		navToSearchFilterShop: function() {
 			this.getRouter().navTo("searchFilterShop");
 		},
@@ -184,7 +185,7 @@ sap.ui.define([
 			oModelNoti.setProperty("/count", "");
 			oModelNoti.updateBindings(true);
 			var isLogging = localStorage.getItem("isLogging");
-			if (isLogging) {
+			if (isLogging === "true") {
 				this.getRouter().navTo("notification");
 			} else {
 				MessageBox.error("Bạn phải đăng nhập mới sử dụng được chức năng này!");
@@ -204,26 +205,17 @@ sap.ui.define([
 		getCountNoti: function(userId) {
 			var that = this;
 			var isLogging = localStorage.getItem("isLogging");
+			var idUser = localStorage.getItem("uid");
 			if (isLogging) {
-				var onSuccess = function(res, status, xhr) {
+				var getNoti = models.getNotifications(idUser);
+				if (getNoti) {
 					var oModelNoti = that.getModel("noti");
-					oModelNoti.setData(res);
-
-					oModelNoti.setProperty("/count", res.length);
-					oModelNoti.updateBindings(true);
-				};
-				var onError = function(jqXHR, textStatus, errorThrown) {
-
-				};
-				$.ajax({
-					type: "GET",
-					// crossDomain: true,
-					// url: "http://172.20.10.2:8080/get-notification",
-					url: "model/notifications.json",
-					dataType: "json",
-					success: onSuccess,
-					error: onError
-				});
+					oModelNoti.setData(getNoti);
+					if (getNoti.length !== 0) {
+						oModelNoti.setProperty("/count", getNoti.length);
+						oModelNoti.updateBindings(true);
+					}
+				}
 			}
 		},
 

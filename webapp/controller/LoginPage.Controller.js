@@ -43,10 +43,10 @@ sap.ui.define([
 				this.getView().byId("passwordUser").setValueState(sap.ui.core.ValueState.Error);
 				MessageBox.error("Không được để trống!");
 			} else if (!checkEmail) {
+				//  !checkEmail
 				MessageBox.error("Email không đúng định dạng");
 			} else {
 				var dataLogin = models.checkLogin(username, password);
-				console.log(dataLogin);
 				// console.log(dataLogin);
 				if (dataLogin.status === 401) {
 					localStorage.setItem("isLogging", false);

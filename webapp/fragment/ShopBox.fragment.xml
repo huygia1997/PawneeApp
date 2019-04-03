@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar">
+	<Dialog title="{i18n>title_shopInfo}" afterClose="dialogAfterclose">
+		<content>
+			<VBox class="info-shopdetail">
+				<Image src="{userOfItem>/avatarUrl}" class="shopDetail-image"/>
+				<HBox class="box_padding">
+					<Label text="{i18n>lb_store}" class="customShop_store"/>
+					<Title text="{userOfItem>/shopName}" class="customShop_title"/>
+				</HBox>
+				<HBox class="box_padding">
+					<Label text="{i18n>lb_address}" class="customShop_store"/>
+					<Title text="{userOfItem>/address/fullAddress}" class="customTextShop_address"/>
+				</HBox>
+				<HBox class="box_padding">
+					<Label text="{i18n>lb_phone}" class="customShop_store"/>
+					<Title text="{userOfItem>/phoneNumber}" class="customTextShop_address"/>
+				</HBox>
+				<HBox id="check_rating" class="box_padding">
+					<Label text="{i18n>lb_rating}" class="customShop_store"/>
+					<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter customTextShop" value="{userOfItem>/rating}"
+						tooltip="Rating Tooltip" displayOnly="true"/>
+				</HBox>
+			</VBox>
+		</content>
+		<endButton>
+			<Button text="Close" press="onDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

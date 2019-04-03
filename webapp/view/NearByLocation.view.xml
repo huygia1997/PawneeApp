@@ -12,11 +12,10 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Button press="findMore" class="btn_searchFilter" icon="sap-icon://sort" text="{i18n>btn_findMore}" width="50%" />
-					<Button press="openDialogFilter" class="btn_searchFilter" icon="sap-icon://filter" text="{i18n>btn_filter}" width="50%"/>
+					<Button icon="sap-icon://list" press="navToSearchFilterShop" text="{i18n>btn_searchFilterShop}" class="btn_location" width="50%"/>
+					<Button press="findMore" class="btn_searchFilter" icon="sap-icon://sort" text="{i18n>btn_findMore}" width="50%"/>
 					<VBox class="box_title_location">
 						<Title text="{titleModel>/title}" class="title_listShop findMoreColor"/>
-						<Button icon="sap-icon://list" press="navToSearchFilterShop" text="{i18n>btn_searchFilterShop}" class="btn_location"/>
 					</VBox>
 					<HBox id="map_canvas" fitContainer="true" justifyContent="Center" alignItems="Center"></HBox>
 				</content>

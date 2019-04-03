@@ -8,7 +8,6 @@
 						<contentLeft>
 							<Button icon="sap-icon://nav-back" width="10%" class="back" press="back"/>
 							<Button text="{i18n>btn_cam_do}" width="45%" id="__button0" class="btn_header" press="navToSearchFilterShop"/>
-							<Button text="{i18n>btn_thanh_ly}" width="45%" id="__button1" class="btn_header"/>
 						</contentLeft>
 					</Bar>
 				</customHeader>
@@ -25,23 +24,46 @@
 				<content>
 					<VBox>
 						<Image src="{dataShopDetail>/avaUrl}" class="shopDetail-image"/>
-						<Button text="{i18n>lb_interested}" press="interestedShop" class="btn_favorite"/>
+						<HBox class="box_btn">
+							<Button id="btn_visible_favorite" visible="{= ${dataShopDetail>/check} === false }" text="{i18n>lb_interested}" press="interestedShop"
+								class="btn_favorite"/>
+							<Button id="btn_visible_unFavorite" visible="{= ${dataShopDetail>/check} === true }" text="{i18n>lb_unInterested}" press="unInterestedShop"
+								class="btn_favorite"/>
+							<Button id="btn_visible_rating" text="{i18n>btn_rating}" press="openDialogRating" class="btn_rating"/>
+						</HBox>
 						<VBox class="info-shopdetail">
-							<Label text="{i18n>lb_store}" class="customShop_store"/>
-							<Title text="{dataShopDetail>/shopName}" class="customShop_title"/>
-							<Label text="{dataShopDetail>/fullAddress}" class="customTextShop_address"/>
-							<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter customTextShop" value="{dataShopDetail>/rating}"
-								tooltip="Rating Tooltip" displayOnly="true"/>
-							<Text text="{dataShopDetail>/policy}" class="customTextShop_policy"/>
-							<Title text="{i18n>title_category}" class="customShop_title_category"/>
-							<List id="ShortProductList" items="{cateItem>/results}" class="listCategory-container">
-								<CustomListItem>
-									<VBox class="box_category">
-										<Image class="categoy_image" src="{cateItem>iconUrl}"/>
-										<Title text="{cateItem>categoryName}" class="category_text"/>
-									</VBox>
-								</CustomListItem>
-							</List>
+							<HBox class="box_padding">
+								<Label text="{i18n>lb_store}" class="customShop_store"/>
+								<Title text="{dataShopDetail>/shopName}" class="customShop_title"/>
+							</HBox>
+							<HBox class="box_padding">
+								<Label text="{i18n>lb_address}" class="customShop_store"/>
+								<Title text="{dataShopDetail>/fullAddress}" class="customTextShop_address"/>
+							</HBox>
+							<HBox id="check_rating" class="box_padding">
+								<Label text="{i18n>lb_rating}" class="customShop_store"/>
+								<RatingIndicator id="RI_default" maxValue="5" class="sapUiSmallMarginBottom fixCenter customTextShop" value="{dataShopDetail>/rating}"
+									tooltip="Rating Tooltip" displayOnly="true"/>
+							</HBox>
+							<HBox id="check_policy" class="box_padding">
+								<Label text="{i18n>lb_policy}" class="customShop_store"/>
+								<Title text="{dataShopDetail>/policy}" class="customTextShop_policy"/>
+							</HBox>
+							<HBox id="check_view" class="box_padding">
+								<Label text="{i18n>lb_viewCount}" class="customShop_store"/>
+								<Title text="{dataShopDetail>/viewCount}" class="customTextShop_policy"/>
+							</HBox>
+							<VBox id="check_category" class="category_container">
+								<Title text="{i18n>title_category}" class="customShop_title_category"/>
+								<List id="ShortProductList" items="{cateItem>/results}" class="listCategory-container">
+									<CustomListItem>
+										<VBox class="box_category">
+											<Image class="categoy_image" src="{cateItem>iconUrl}"/>
+											<Title text="{cateItem>categoryName}" class="category_text"/>
+										</VBox>
+									</CustomListItem>
+								</List>
+							</VBox>
 						</VBox>
 						<VBox class="box-btn-and-map">
 							<HBox id="map" class="custom-map-shopinfo" height="1000px" fitContainer="true" justifyContent="Center" alignItems="Center"></HBox>

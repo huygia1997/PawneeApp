@@ -25,6 +25,7 @@ sap.ui.define([
 					results: getData
 				});
 				this.setModel(oModelShop, "oModelShop");
+				console.log(oModelShop);
 			}
 		},
 
@@ -36,6 +37,7 @@ sap.ui.define([
 					results: getData
 				});
 				this.setModel(oModelShop, "oModelSaleItem");
+				console.log(oModelShop) ;
 			}
 		},
 
@@ -51,10 +53,10 @@ sap.ui.define([
 		},
 		
 		navToSaleItem: function() {
-			// this.getRouter().navTo("searchFilterItem");
-			this.getRouter().navTo("activate", {
-				token: 123
-			});
+			this.getRouter().navTo("searchFilterItem");
+			// this.getRouter().navTo("activate", {
+			// 	token: 123
+			// });
 		},
 		
 		selectSaleItem: function(oEvent) {
@@ -70,7 +72,7 @@ sap.ui.define([
 		
 		navToRegisterShop: function() {
 			var isLogging = localStorage.getItem("isLogging");
-			if(isLogging) {
+			if(isLogging === "true") {
 				this.getRouter().navTo("registerShop");
 			} else {
 				MessageBox.error("Bạn cần Đăng nhập để tiếp tục Đăng kí trở thành Chủ Shop trong hệ thống!");

@@ -36,7 +36,7 @@
     height: inherit;
 }
 .listShopItem_address {
-    font-size: 12px;
+    font-size: 16px;
 }
 .listShop_title {
     font-size: 1.5em;
@@ -47,7 +47,7 @@
 }
 .listShop_text {
     color: #fff;
-    font-size: 12px;
+    font-size: 16px;
 }
 .sapMIBar.sapMHeader-CTX {
     background-color: #3f5161;
@@ -78,7 +78,8 @@
 }
 .shopList_container .sapMListHdrText,
 .listSaleItem_container .sapMListHdrText {
-    color: #50d2e8;
+    color: #f15323;
+    font-weight: bold;
 }
 .listShopItem_image {
     width: 80px;
@@ -92,6 +93,7 @@
 }
 .linkNavTo {
     margin: 20px;
+    font-size: 16px;
 }
 .listSaleItem {
     display: inline-block;
@@ -241,6 +243,7 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
 .btn_searchFilter .sapMBtnInner {
     border: none;
     border-right: 1px solid #bfbfbf;
+    font-size: 15px;
 }
 .btn_searchFilter .sapMBtnText>.sapMBtnIcon {
     left: 15%;
@@ -249,9 +252,9 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     position: absolute;
     left: 10px;
     top: 15px;
-    color: #50d2e8;
+    color: #f15323;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 12px;
 }
 .findMoreColor {
     color: #d93025;
@@ -268,12 +271,14 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
 }
 .btn_location bdi,
 .btn_location .sapMBtnIcon {
-    color: #50d2e8;
-    font-size: 14px;
+    color: #f15323;
+    font-size: 18px;
+    font-weight: bold;
 }
 .btn_location .sapMBtnInner {
     background: #fff;
-    border: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 .btn_location:hover>.sapMBtnHoverable {
     background: #fff;
@@ -290,7 +295,6 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
 .info-shopdetail {
     display: inline-block;
     width: 100%;
-    margin: 10px;
 }
 .grid-custom,
 .grid-custom>div {
@@ -327,6 +331,8 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
 }
 .customShop_store {
     margin-bottom: 10px;
+    width: 90px;
+    white-space: normal;
 }
 .customShop_title_category {
     color: #50d2e8;
@@ -499,7 +505,7 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     white-space: normal !important;
     color: #f57c00;
     margin: 10px;
-} 
+}
 .btn_registerShop {
     background-color: #f15323;
     border-radius: 5px;
@@ -513,5 +519,141 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     border: none;
 }
 .btn_registerShop bdi {
-	color: #fff;
+    color: #fff;
+}
+.custom-map-register {
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+}
+.grey-text {
+    padding: 5px 10px;
+    color: grey;
+}
+.registerShop-footer {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.btn_configRegisterShop {
+    width: 150px;
+    margin: 10px 0;
+}
+.btn_favorite {
+    background-color: #f15323;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.btn_favorite .sapMBtnInner {
+    background: #f15323;
+    border: none;
+}
+.btn_favorite:hover>.sapMBtnHoverable {
+    background: #f15323;
+    border: none;
+}
+.btn_favorite bdi {
+    color: #fff;
+}
+.display_none {
+    display: none !important;
+}
+.box_rating {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.title_rating {
+    margin-top: 10px;
+}
+.title_rating span {
+    white-space: normal;
+}
+.btn_rating {
+    background-color: #ffaa1e;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.btn_rating .sapMBtnInner {
+    background: #ffaa1e;
+    border: none;
+}
+.btn_rating:hover>.sapMBtnHoverable {
+    background: #ffaa1e;
+    border: none;
+}
+.btn_rating bdi {
+    color: #fff;
+}
+.category_container .sapMListNoDataText,
+.list_images .sapMListNoDataText {
+    display: none;
+}
+.item_images {
+    display: inline-block;
+    width: 100%;
+}
+.list_images ul {
+    display: inline-block;
+    width: 100%;
+}
+.list_images ul li {
+    display: inline-block;
+    width: 25%;
+}
+.list_images ul li img {
+    display: inline-block;
+    width: 100%;
+}
+.label_for_btn {
+    font-size: 13px;
+    padding-top: 10px;
+    font-style: italic;
+    color: red;
+}
+.sapMGrowingListDescription {
+    display: none !important;
+}
+.footer_icon_box {
+    display: inline-block;
+    text-align: center;
+    height: 48px;
+}
+.footer_btn {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+.footer_lb {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 12px;
+}
+.listSortItem {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.listCategory_fragment {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    border-left: 1px solid #ccc;
+}
+.btn_favorite_box {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+.box_padding {
+    padding: 0 10px;
+}
+.box_btn {
+    margin-bottom: 10px;
+}
+.padding_top {
+	padding-top: 5px;
 }

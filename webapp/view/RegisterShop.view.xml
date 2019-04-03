@@ -88,7 +88,7 @@
 							<Text class="grey-text" text="{i18n>register_guild}"/>
 							<HBox id="map_canvas" fitContainer="true" justifyContent="Center" alignItems="Center" class="custom-map-register"></HBox>
 							<Text class="grey-text" text="{i18n>register_policy}"/>
-							<Button busy="{= ${loginResult>/isLogging} ? true : false}" class="btn-findmore registerShop-sizeBtn" text="{i18n>btn_register_shop}"
+							<Button busy="{= ${loginResult>/isLogging} ? true : false}" class="btn_registerShop btn_configRegisterShop" text="{i18n>btn_register_shop}"
 								press="registerShop"/>
 						</VBox>
 					</VBox>

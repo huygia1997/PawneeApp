@@ -4,7 +4,9 @@ sap.ui.define([
 ], function(JSONModel, Device) {
 	"use strict";
 	var serverInfo = {
-		url: "http://192.168.2.60:8080",
+		// url: "http://45.77.31.103:8080/new5",
+		// url: "http://192.168.2.103:8080",
+		url: "http://198.13.54.16:8080/new2",
 		localUrl: "model",
 		useLocal: false
 	};
@@ -89,7 +91,7 @@ sap.ui.define([
 			var url;
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/shop.json";
-			} else if (lat === null || lng === null) {
+			} else if (!lat || !lng) {
 				url = serverInfo.url + "/de-xuat-cua-hang";
 			} else {
 				url = serverInfo.url + "/de-xuat-cua-hang?lat=" + lat + "&lng=" + lng;
@@ -355,13 +357,22 @@ sap.ui.define([
 			return data;
 		},
 
-		getShopByFilter: function(cate, district) {
+		getShopByFilter: function(page, sort, cate, district) {
 			var data;
 			var url;
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/shop.json";
 			} else {
-				url = serverInfo.url + "/search/shops/filters?cate=" + cate + "&district=" + district;
+				if (cate && district) {
+					url = serverInfo.url + "/search/shops/listfilters?cate=" + cate + "&district=" + district + "&page=" + page + "&sort=" + sort;
+				} else if (!district) {
+					url = serverInfo.url + "/search/shops/listfilters?cate=" + cate + "&page=" + page + "&sort=" + sort;
+				} else if (!cate) {
+					url = serverInfo.url + "/search/shops/listfilters?district=" + district + "&page=" + page + "&sort=" + sort;
+				}else {
+					url = serverInfo.url + "/search/shops/listfilters?page=" + page + "&sort=" + sort;
+				}
+
 			}
 			$.ajax({
 				type: "GET",
@@ -405,13 +416,17 @@ sap.ui.define([
 			return data;
 		},
 
-		getItemBySort: function(sort, page) {
+		getItemBySort: function(sort, page, categoryid) {
 			var data;
 			var url;
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/shop.json";
 			} else {
-				url = serverInfo.url + "/hang-thanh-ly?sort=" + sort + "&page=" + page;
+				if (categoryid) {
+					url = serverInfo.url + "/hang-thanh-ly?sort=" + sort + "&page=" + page + "&categoryid=" + categoryid;
+				} else {
+					url = serverInfo.url + "/hang-thanh-ly?sort=" + sort + "&page=" + page;
+				}
 			}
 			$.ajax({
 				type: "GET",
@@ -429,19 +444,19 @@ sap.ui.define([
 			});
 			return data;
 		},
-		
+
 		getItemDetail: function(itemId, userId) {
 			var data;
 			var url;
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/shop.json";
 			} else {
-				if(userId) {
+				if (userId) {
 					url = serverInfo.url + "/thong-tin-san-pham?itemId=" + itemId + "&userId=" + userId;
 				} else {
 					url = serverInfo.url + "/thong-tin-san-pham?itemId=" + itemId;
 				}
-				
+
 			}
 			$.ajax({
 				type: "GET",
@@ -459,7 +474,7 @@ sap.ui.define([
 			});
 			return data;
 		},
-		
+
 		checkActivate: function(token) {
 			var data;
 			var url;
@@ -484,9 +499,9 @@ sap.ui.define([
 			});
 			return data;
 		},
-		
+
 		updateUserInfo: function(data) {
-			var callback, data;
+			var callback;
 			var url;
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/shop.json";
@@ -510,8 +525,219 @@ sap.ui.define([
 
 			});
 			return callback;
-		}
+		},
 
+		registerShop: function(data) {
+			var callback;
+			var url;
+			if (serverInfo.useLocal) {
+				url = serverInfo.localUrl + "/shop.json";
+			} else {
+				url = serverInfo.url + "/tro-thanh-cua-hang";
+			}
+			$.ajax({
+				type: "POST",
+				url: url,
+				context: this,
+				data: data,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+					callback = r;
+				},
+				error: function(e) {
+					callback = e;
+				}
+
+			});
+			return callback;
+		},
+
+		checkFavorite: function(shopId, userId) {
+			var callback;
+			var url;
+			if (serverInfo.useLocal) {
+				url = serverInfo.localUrl + "/shop.json";
+			} else {
+				url = serverInfo.url + "/quan-tam-cua-hang?shopId=" + shopId + "&userId=" + userId;
+			}
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					callback = r;
+				},
+				error: function(e) {
+					callback = e;
+				}
+
+			});
+			return callback;
+		},
+
+		checkUnFavorite: function(shopId, userId) {
+			var callback;
+			var url;
+			if (serverInfo.useLocal) {
+				url = serverInfo.localUrl + "/shop.json";
+			} else {
+				url = serverInfo.url + "/bo-quan-tam-cua-hang?shopId=" + shopId + "&userId=" + userId;
+			}
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					callback = r;
+				},
+				error: function(e) {
+					callback = e;
+				}
+
+			});
+			return callback;
+		},
+
+		ratingShop: function(rate, accountId, shopId) {
+			var callback;
+			var url;
+			if (serverInfo.useLocal) {
+				url = serverInfo.localUrl + "/shop.json";
+			} else {
+				url = serverInfo.url + "/danh-gia-cua-hang?rate=" + rate + "&accountId=" + accountId + "&shopId=" + shopId;
+			}
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					callback = r;
+				},
+				error: function(e) {
+					callback = e;
+				}
+
+			});
+			return callback;
+		},
+
+		checkFavoriteItem: function(itemId, userId) {
+			var callback;
+			var url;
+			if (serverInfo.useLocal) {
+				url = serverInfo.localUrl + "/shop.json";
+			} else {
+				url = serverInfo.url + "/theo-doi-san-pham?itemId=" + itemId + "&userId=" + userId;
+			}
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					callback = r;
+				},
+				error: function(e) {
+					callback = e;
+				}
+
+			});
+			return callback;
+		},
+
+		checkUnFavoriteItem: function(itemId, userId) {
+			var callback;
+			var url;
+			if (serverInfo.useLocal) {
+				url = serverInfo.localUrl + "/shop.json";
+			} else {
+				url = serverInfo.url + "/bo-theo-doi-san-pham?itemId=" + itemId + "&userId=" + userId;
+			}
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					callback = r;
+				},
+				error: function(e) {
+					callback = e;
+				}
+
+			});
+			return callback;
+		},
+
+		getListSortByShop: function() {
+			var data;
+			var url = serverInfo.localUrl + "/sortShop.json";
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+				},
+				error: function(e) {
+					data = e;
+				}
+
+			});
+			return data;
+		},
+
+		getListSortItem: function() {
+			var data;
+			var url = serverInfo.localUrl + "/sortItem.json";
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+				},
+				error: function(e) {
+					data = e;
+				}
+
+			});
+			return data;
+		},
+
+		getAllCategory: function() {
+			var data;
+			var url = serverInfo.url + "/get-all-category";
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+				},
+				error: function(e) {
+					data = e;
+				}
+
+			});
+			return data;
+		}
 	};
 
 });

@@ -13,21 +13,26 @@ sap.ui.define([
 		 * @memberOf Mortgage-App.view.SearchFilterShop
 		 */
 		onInit: function() {
+
+			var oRouter = this.getRouter();
+
+			oRouter.getRoute("searchFilterItem").attachPatternMatched(this._onRouteMatched, this);
+		},
+
+		_onRouteMatched: function() {
 			var oModelItem = new JSONModel();
 			this.setModel(oModelItem, "oModelItem");
 
 			this.getBestItem();
-		},
-
-		_onRouteMatched: function() {
-
+			var filterCate = new JSONModel();
+			this.setModel(filterCate, "filterCate");
 		},
 
 		backToPreviousPage: function() {
 			this.back();
 		},
 
-		getBestItem: function(sort, page) {
+		getBestItem: function(sort, page, cateId) {
 			this.getModel("oModelItem").setData(null);
 			this.getModel("oModelItem").updateBindings();
 			// sort all
@@ -41,7 +46,7 @@ sap.ui.define([
 					});
 				}
 			} else {
-				var dataItemSort = models.getItemBySort(sort, 0);
+				var dataItemSort = models.getItemBySort(sort, page, cateId);
 				if (dataItemSort) {
 					var oModelSortItem = this.getModel("oModelItem");
 					oModelSortItem.setData({
@@ -62,27 +67,61 @@ sap.ui.define([
 			}
 		},
 
-		onChangeSort: function() {
-			var selectText = this.getView().byId("filterSort").getSelectedItem().getText();
-			switch (selectText) {
-				case "Tất cả":
-					this.getBestItem(6, 0);
-					break;
-				case "Giá thấp nhất":
-					this.getBestItem(5, 0);
-					break;
-				case "Giá cao nhất":
-					this.getBestItem(4, 0);
-					break;
-				case "Lượt thích":
-					this.getBestItem(3, 0);
-					break;
-				case "Lượt xem":
-					this.getBestItem(2, 0);
-					break;
-				case "Sản phẩm mới":
-					this.getBestItem(1, 0);
-					break;
+		selectOptionCate: function(oEvent) {
+			var item = oEvent.getSource();
+			var bindingContext = item.getBindingContext("listResult");
+			if (bindingContext) {
+				var cateId = bindingContext.getProperty("id");
+				this.getModel("filterCate").setProperty("/filter", cateId);
+
+				this.getBestItem(6, 0, cateId);
+
+				this._CateDialog.close();
+			}
+		},
+
+		openDialogFilterByCate: function() {
+			if (!this._CateDialog) {
+				this._CateDialog = sap.ui.xmlfragment(this.getId(), "Mortgage-App.fragment.ListCategory",
+					this);
+				var listDialogModel = new JSONModel();
+				var getList = models.getAllCategory();
+				listDialogModel.setData({
+					results: getList
+				});
+				this._CateDialog.setModel(listDialogModel, "listResult");
+				//Set models which is belonged to View to Fragment
+				this.getView().addDependent(this._CateDialog);
+			}
+			this._CateDialog.open();
+		},
+
+		openDialogSort: function() {
+			if (!this._SortDialog) {
+				this._SortDialog = sap.ui.xmlfragment(this.getId(), "Mortgage-App.fragment.SortBox",
+					this);
+				var sortDialogModel = new JSONModel();
+				var getSort = models.getListSortItem();
+				sortDialogModel.setData({
+					results: getSort
+				});
+				this._SortDialog.setModel(sortDialogModel, "sortResult");
+				//Set models which is belonged to View to Fragment
+				this.getView().addDependent(this._SortDialog);
+			}
+			this._SortDialog.open();
+		},
+
+		selectOptionSort: function(oEvent) {
+			var item = oEvent.getSource();
+			var bindingContext = item.getBindingContext("sortResult");
+			if (bindingContext) {
+				var sortId = bindingContext.getProperty("sortId");
+				var cateId = this.getModel("filterCate").getProperty("/filter");
+
+				this.getBestItem(sortId, 0, cateId);
+
+				this._SortDialog.close();
 			}
 		},
 

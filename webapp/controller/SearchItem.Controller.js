@@ -12,7 +12,7 @@ sap.ui.define([
 		 * @memberOf Mortgage-App.view.Search
 		 */
 		onInit: function() {
-			
+
 		},
 
 		onSearch: function(oEvent) {
@@ -77,15 +77,18 @@ sap.ui.define([
 			var arr = [];
 			var oModel = new JSONModel();
 			var keyword = localStorage.getItem("query_item");
-			// convert String to array
-			arr = keyword.split(",");
-			oModel.setData({
-				results: arr
-			});
+			// check keyword not null
+			if (keyword) {
+				// convert String to array
+				arr = keyword.split(",");
+				oModel.setData({
+					results: arr
+				});
+			} 
 			this.setModel(oModel, "keyword");
 			// console.log(oModel);
 		},
-		
+
 		navToSearchShop: function() {
 			this.getRouter().navTo("searchShop");
 		},

@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar">
+	<Dialog title="{i18n>title_rating}" afterClose="dialogAfterclose">
+		<content>
+			<VBox class="box_rating">
+				<Title visible="{= ${dataShopDetail>/isRating} === true}" text="{i18n>title_thanks}" class="title_rating"/>
+				<RatingIndicator id="rating" maxValue="5" 
+					class="sapUiSmallMarginBottom fixCenter customTextShop" value="0"
+					tooltip="Rating Tooltip" change="changeRating"/>
+			</VBox>
+		</content>
+		<endButton>
+			<Button text="Close" press="onDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

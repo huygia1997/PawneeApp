@@ -1,0 +1,17 @@
+[{
+	"id": 1,
+	"sortName": "Tất cả",
+	"sortId": 3
+}, {
+	"id": 2,
+	"sortName": "Xếp hạng",
+	"sortId": 1
+}, {
+	"id": 2,
+	"sortName": "Đề xuất",
+	"sortId": 0
+}, {
+	"id": 2,
+	"sortName": "Lượt xem",
+	"sortId": 2
+}]

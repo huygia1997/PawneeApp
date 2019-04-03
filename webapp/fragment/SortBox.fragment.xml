@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar">
+	<Dialog title="{i18n>title_sortBox}" afterClose="dialogAfterclose">
+		<content>
+			<List id="SortList" items="{sortResult>/results}" class="sortList_container">
+				<CustomListItem type="Navigation" press="selectOptionSort" class="listSortItem">
+					<VBox>
+						<Title text="{sortResult>sortName}" />
+					</VBox>
+				</CustomListItem>
+			</List>
+		</content>
+		<endButton>
+			<Button text="Close" press="onDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
