@@ -62,6 +62,7 @@
 .btn_header bdi,
 .back span {
     color: #fff;
+    font-size: 22px;
 }
 .sapMBtnInner {
     text-shadow: none;
@@ -249,25 +250,24 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     left: 15%;
 }
 .title_listShop {
-    position: absolute;
-    left: 10px;
-    top: 15px;
+	display: block;
     color: #f15323;
     font-size: 16px;
     font-weight: bold;
+    white-space: normal;
+    padding: 10px;
 }
 .findMoreColor {
     color: #d93025;
 }
 .box_title_location {
-    position: relative;
     display: block;
     width: 100%;
-    height: 50px;
+    height: 70px;
 }
-.btn_location {
-    position: absolute;
-    right: 10px;
+.box_title_location > div {
+    display: inline-block;
+    width: 50%;
 }
 .btn_location bdi,
 .btn_location .sapMBtnIcon {
@@ -277,12 +277,19 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
 }
 .btn_location .sapMBtnInner {
     background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
 }
 .btn_location:hover>.sapMBtnHoverable {
     background: #fff;
     border: none;
+}
+.border_full {
+	border: 2px solid #f15323;
+	border-radius: 5px;
+	margin: 10px;
+}
+.border_bottom {
+    border-bottom: 2px solid #f15323;
 }
 .page_container {
     position: relative;
@@ -321,6 +328,9 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
 .shopDetail-label {
     font-size: 12px;
     width: 50px;
+}
+.sapMLightBoxMagnifyingGlass {
+	display: none !important;
 }
 .customShop_title {
     font-weight: bold;
@@ -655,5 +665,19 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     margin-bottom: 10px;
 }
 .padding_top {
-	padding-top: 5px;
+    padding-top: 5px;
+}
+.findShopByMap {
+    display: inline-block;
+    width: 100%;
+}
+.custom-image-box {
+    display: inline-block;
+    width: 30px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.custom-content-box {
+    display: inline-block;
+    vertical-align: middle;
 }

@@ -185,6 +185,12 @@
 				"target": [
 					"registerShop"
 				]
+			}, {
+				"pattern": "FindShopByMap/dis={dis}&cate={cate}",
+				"name": "findShopByMap",
+				"target": [
+					"findShopByMap"
+				]
 			}],
 			"targets": {
 				"home": {
@@ -260,6 +266,10 @@
 				"registerShop": {
 					"viewName": "registerShop",
 					"viewId": "registerShop"
+				},
+				"findShopByMap": {
+					"viewName": "findShopByMap",
+					"viewId": "findShopByMap"
 				}
 			}
 		}

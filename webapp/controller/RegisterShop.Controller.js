@@ -106,7 +106,7 @@ sap.ui.define([
 					latitude: lat
 				};
 				var callback = models.registerShop(registerData);
-				if (callback === "success") {
+				if (callback == "success") {
 					MessageBox.success("Gửi đăng ký thành công! Hệ thống sẽ duyệt Cửa hàng của bạn!");
 				} else if (callback.status === 406) {
 					MessageBox.error("Tài khoản này đã được đăng ký thành chủ tiệm");

@@ -31,12 +31,13 @@
 					</Bar>
 				</footer>
 				<content>
-					<VBox class="box_title_location">
-						<Title text="{i18n>title_shops}" class="title_listShop"/>
-						<!--<Button icon="sap-icon://functional-location" press="navToNearByLocation" text="{i18n>btn_nearByLocation}" class="btn_location"/>-->
-					</VBox>
+					<HBox class="box_title_location">
+						<Button width="100%" icon="sap-icon://menu" text="{i18n>btn_listShop}" class="btn_location border_bottom"/>
+						<Button width="100%" icon="sap-icon://map-2" 
+						press="navToMapShop" text="{i18n>btn_mapShop}" class="btn_location"/>
+					</HBox>
 					<List id="ShopList" items="{oModelShop>/results}" class="shopList_container" 
-					growing="true" growingThreshold="10" growingScrollToLoad="true">
+					growing="true" growingThreshold="10" growingScrollToLoad="true" growingStarted="loadMoreShop">
 						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
 							<HBox>
 								<Image src="{oModelShop>avatarUrl}" class="listShopItem_image"/>

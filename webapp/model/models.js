@@ -6,7 +6,7 @@ sap.ui.define([
 	var serverInfo = {
 		// url: "http://45.77.31.103:8080/new5",
 		// url: "http://192.168.2.103:8080",
-		url: "http://198.13.54.16:8080/new2",
+		url: "https://backend-mortgage.dfksoft.com/new",
 		localUrl: "model",
 		useLocal: false
 	};
@@ -369,7 +369,7 @@ sap.ui.define([
 					url = serverInfo.url + "/search/shops/listfilters?cate=" + cate + "&page=" + page + "&sort=" + sort;
 				} else if (!cate) {
 					url = serverInfo.url + "/search/shops/listfilters?district=" + district + "&page=" + page + "&sort=" + sort;
-				}else {
+				} else {
 					url = serverInfo.url + "/search/shops/listfilters?page=" + page + "&sort=" + sort;
 				}
 
@@ -722,6 +722,34 @@ sap.ui.define([
 		getAllCategory: function() {
 			var data;
 			var url = serverInfo.url + "/get-all-category";
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+				},
+				error: function(e) {
+					data = e;
+				}
+
+			});
+			return data;
+		},
+
+		getAllShopByFilterOfMap: function(cate, dis) {
+			var data, url;
+			if (cate !== "null" && dis === "null") {
+				url = serverInfo.url + "/search/shops/mapfilters?cate=" + cate;
+			} else if (cate === "null" && dis !== "null") {
+				url = serverInfo.url + "/search/shops/mapfilters?district=" + dis;
+			} else if (cate !== "null" && dis !== "null") {
+				url = serverInfo.url + "/search/shops/mapfilters?cate=" + cate + "&district=" + dis;
+			} else {
+				url = serverInfo.url + "/search/shops/mapfilters";
+			}
 			$.ajax({
 				type: "GET",
 				url: url,

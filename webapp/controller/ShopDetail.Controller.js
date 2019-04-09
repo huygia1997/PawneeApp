@@ -50,15 +50,20 @@ sap.ui.define([
 		},
 
 		openDialogRating: function() {
-			if (!this._RatingDialog) {
-				this._RatingDialog = sap.ui.xmlfragment(this.getId(), "Mortgage-App.fragment.RatingBox",
-					this);
-				var ratingDialogModel = new JSONModel();
-				this._RatingDialog.setModel(ratingDialogModel, "ratingResult");
-				//Set models which is belonged to View to Fragment
-				this.getView().addDependent(this._RatingDialog);
+			var userId = localStorage.getItem("uid");
+			if (userId) {
+				if (!this._RatingDialog) {
+					this._RatingDialog = sap.ui.xmlfragment(this.getId(), "Mortgage-App.fragment.RatingBox",
+						this);
+					var ratingDialogModel = new JSONModel();
+					this._RatingDialog.setModel(ratingDialogModel, "ratingResult");
+					//Set models which is belonged to View to Fragment
+					this.getView().addDependent(this._RatingDialog);
+				}
+				this._RatingDialog.open();
+			} else {
+				MessageBox.information("Bạn phải đăng nhập mới sử dụng chức năng này!");
 			}
-			this._RatingDialog.open();
 		},
 
 		changeRating: function(oEvent) {
@@ -107,92 +112,37 @@ sap.ui.define([
 		},
 
 		visibleButton: function() {
-			// var getCheckInLocal = localStorage.getItem("checkF");
 			var checkF = this.getModel("dataShopDetail").getProperty("/checkFavorite");
-			var checkRating = this.getModel("dataShopDetail").getProperty("/checkRate");
-			var idUser = localStorage.getItem("uid");
-			// var shopId = this.getModel("dataShopDetail").getProperty("/id");
-			// hien nut quan tam
-
+			
 			if (checkF == true) {
-				// arrayList = getCheckInLocal.split(",");
-				// for (var i = 0; i < arrayList.length; i++) {
-				// 	if (arrayList[i] == shopId) {
-				// 		// hien button bo quan tam
-				// 		this.getModel("dataShopDetail").setProperty("/check", true);
-				// 	} 
-				// }
 				this.getModel("dataShopDetail").setProperty("/check", true);
 			} else if (checkF == false) {
 				this.getModel("dataShopDetail").setProperty("/check", false);
 			} else {
-				this.getView().byId("btn_visible_favorite").addStyleClass("display_none");
-				this.getView().byId("btn_visible_unFavorite").addStyleClass("display_none");
-			}
-			if (!idUser) {
-				this.getView().byId("check_rating").addStyleClass("display_none");
-				this.getView().byId("check_policy").addStyleClass("display_none");
-				this.getView().byId("check_view").addStyleClass("display_none");
-			} else {
-				this.getView().byId("check_rating").removeStyleClass("display_none");
-				this.getView().byId("check_policy").removeStyleClass("display_none");
-				this.getView().byId("check_view").removeStyleClass("display_none");
-			}
-			if (checkRating == true) {
-				this.getView().byId("btn_visible_rating").addStyleClass("display_none");
+				this.getModel("dataShopDetail").setProperty("/check", false);
 			}
 		},
 
 		interestedShop: function() {
 			var userId = localStorage.getItem("uid");
 			var shopId = this.getModel("dataShopDetail").getProperty("/id");
-			// var getCheckInLocal = localStorage.getItem("checkF");
 			var checkFavorite = models.checkFavorite(shopId, userId);
 			if (userId != null) {
-				// if (!getCheckInLocal) {
-				// 	if (checkFavorite === "success") {
-				// 		MessageBox.success("Cảm ơn bạn đã quan tâm đến Cửa hàng!");
-				// 		this.getModel("dataShopDetail").setProperty("/check", true);
-				// 		localStorage.setItem("checkF", shopId);
-				// 	}
-				// } else {
-				// 	localStorage.removeItem("checkF");
-				// 	arrayList = getCheckInLocal.split(",");
-				// 	if (checkFavorite === "success") {
-				// 		MessageBox.success("Cảm ơn bạn đã quan tâm đến Cửa hàng!");
-				// 		this.getModel("dataShopDetail").setProperty("/check", true);
-				// 		arrayList.push(shopId);
-				// 		localStorage.setItem("checkF", arrayList);
-				// 	}
-				// }
 				if (checkFavorite === "success") {
 					MessageBox.success("Cảm ơn bạn đã quan tâm đến Cửa hàng!");
 					this.getModel("dataShopDetail").setProperty("/check", true);
-					// localStorage.setItem("checkF", shopId);
 				}
 			} else {
-				MessageBox.error("Bạn phải đăng nhập mới sử dụng được chức năng này!");
+				MessageBox.information("Bạn phải đăng nhập mới sử dụng được chức năng này!");
 			}
 		},
 
 		unInterestedShop: function() {
 			var userId = localStorage.getItem("uid");
 			var shopId = this.getModel("dataShopDetail").getProperty("/id");
-			// var getCheckInLocal = localStorage.getItem("checkF");
-			// if (arrayList.length) {
-			// 	arrayList = getCheckInLocal.split(",");
-			// }
 			var checkUnFavorite = models.checkUnFavorite(shopId, userId);
 			if (checkUnFavorite === "success") {
-				// var newArray = [];
-				// localStorage.removeItem("checkF");
 				this.getModel("dataShopDetail").setProperty("/check", false);
-				// for (var i = 0; i < arrayList.length; i++) {
-				// 	if (arrayList[i] != shopId) {
-				// 		newArray.push(arrayList[i]);
-				// 	}
-				// }
-				// localStorage.setItem("checkF", newArray);
 				MessageBox.success("Đã bỏ Quan tâm!");
 			}
 		},

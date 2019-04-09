@@ -27,6 +27,10 @@
 								<Title text="{oModelItem>/name}" class="customShop_title"/>
 							</HBox>
 							<HBox class="box_padding">
+								<Label text="{i18n>lb_description}" class="customShop_store"/>
+								<Title text="{oModelItem>/description}" class="customTextShop_address"/>
+							</HBox>
+							<HBox class="box_padding">
 								<Label text="{i18n>lb_price}" class="customShop_store"/>
 								<Title text="{oModelItem>/price} VNĐ" class="customTextShop_address"/>
 							</HBox>

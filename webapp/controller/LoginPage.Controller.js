@@ -33,12 +33,13 @@ sap.ui.define([
 
 		checkToLogin: function() {
 			var emailValue = this.getView().byId("userName").getValue();
+			var passwordValue = this.getView().byId("passwordUser").getValue();
 			var checkEmail = this.validateEmailGlobal(emailValue);
 			var loginModel = this.getModel("loginModel");
 			var username = loginModel.getProperty("/username");
 			var password = loginModel.getProperty("/password");
-			// 
-			if (username === "" || password === "") {
+			
+			if (emailValue === "" || passwordValue === "") {
 				this.getView().byId("userName").setValueState(sap.ui.core.ValueState.Error);
 				this.getView().byId("passwordUser").setValueState(sap.ui.core.ValueState.Error);
 				MessageBox.error("Không được để trống!");
@@ -58,7 +59,8 @@ sap.ui.define([
 					this.getGlobalModel().setProperty("/password", dataLogin.password);
 					this.getGlobalModel().setProperty("/lat", dataLogin.lat);
 					this.getGlobalModel().setProperty("/lng", dataLogin.lng);
-
+					
+					
 					//save_login to LocalStorage
 					localStorage.setItem("username", dataLogin.username);
 					localStorage.setItem("token", dataLogin.password);
