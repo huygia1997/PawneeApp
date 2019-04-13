@@ -26,6 +26,8 @@ sap.ui.define([
 			this.getBestItem();
 			var filterCate = new JSONModel();
 			this.setModel(filterCate, "filterCate");
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
 		},
 
 		backToPreviousPage: function() {
@@ -33,8 +35,6 @@ sap.ui.define([
 		},
 
 		getBestItem: function(sort, page, cateId) {
-			this.getModel("oModelItem").setData(null);
-			this.getModel("oModelItem").updateBindings();
 			// sort all
 			var selectFirstKey = 6;
 			if (!sort) {
@@ -119,8 +119,11 @@ sap.ui.define([
 				var sortId = bindingContext.getProperty("sortId");
 				var cateId = this.getModel("filterCate").getProperty("/filter");
 
-				this.getBestItem(sortId, 0, cateId);
-
+				if (sortId == 6) {
+					this.getBestItem();
+				} else {
+					this.getBestItem(sortId, 0, cateId);
+				}
 				this._SortDialog.close();
 			}
 		},

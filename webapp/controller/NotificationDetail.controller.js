@@ -1,8 +1,9 @@
 sap.ui.define([
 	'Mortgage-App/controller/BaseController',
 	"sap/ui/model/json/JSONModel",
-	"Mortgage-App/model/formatter"
-], function(BaseController, JSONModel, formatter) {
+	"Mortgage-App/model/formatter",
+	'Mortgage-App/model/models'
+], function(BaseController, JSONModel, formatter, models) {
 	"use strict";
 
 	return BaseController.extend("Mortgage-App.controller.NotificationDetail", {
@@ -14,13 +15,32 @@ sap.ui.define([
 		 * @memberOf Mortgage-App.view.Search
 		 */
 		onInit: function() {
+			var oRouter = this.getRouter();
 
+			oRouter.getRoute("notificationDetail").attachPatternMatched(this._onRouteMatched, this);
+		},
+
+		_onRouteMatched: function(oEvent) {
+			var objId = oEvent.getParameter("arguments").objId;
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
+
+			this.getNotiDetail(objId);
 		},
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).
 		 * @memberOf Mortgage-App.view.Search
 		 */
+
+		getNotiDetail: function(objId) {
+			var getData = models.getNotiDetail(objId);
+			var oModelNoti = new JSONModel();
+			if(getData) {
+				oModelNoti.setData(getData);
+			}
+			this.setModel(oModelNoti, "oModelNoti");
+		},
 
 		onBeforeRendering: function() {
 

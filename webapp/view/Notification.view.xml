@@ -22,9 +22,7 @@
 				</footer>
 				<content>
 					<List id="ShortProductList" items="{dataNotify>/results}">
-						<StandardListItem icon="{ path: 'dataNotify>status', formatter: '.formatter.statusNoti' }" 
-						title="{dataNotify>message}" description="{dataNotify>dateCreate}" 
-						type="Navigation" press="selectNotify" class="notiBox"/>
+						<StandardListItem title="{dataNotify>message}" description="{dataNotify>dateCreate}" type="Navigation" press="selectNotify" class="notiBox"/>
 					</List>
 				</content>
 			</Page>

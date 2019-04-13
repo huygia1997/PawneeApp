@@ -23,7 +23,7 @@
 				</footer>
 				<content>
 					<SearchField class="field_search" id="searchField" search="onSearch" placeholder="{i18n>content_search_field}"/>
-					<List id="ShopList" headerText="{i18n>title_results}" items="{oModelItem>/results}" class="shopList_container">
+					<List growing="true" growingThreshold="10" growingScrollToLoad="true" id="ShopList" headerText="{i18n>title_results}" items="{oModelItem>/results}" class="shopList_container">
 						<CustomListItem type="Navigation" press="navToItemDetail" class="listShopItem">
 							<HBox>
 								<Image src="{oModelItem>picUrl}" class="listShopItem_image"/>

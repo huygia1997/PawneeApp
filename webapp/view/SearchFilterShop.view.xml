@@ -37,7 +37,7 @@
 						press="navToMapShop" text="{i18n>btn_mapShop}" class="btn_location"/>
 					</HBox>
 					<List id="ShopList" items="{oModelShop>/results}" class="shopList_container" 
-					growing="true" growingThreshold="10" growingScrollToLoad="true" growingStarted="loadMoreShop">
+					growing="true" growingThreshold="10" growingScrollToLoad="true">
 						<CustomListItem type="Navigation" press="navToShopDetail" class="listShopItem">
 							<HBox>
 								<Image src="{oModelShop>avatarUrl}" class="listShopItem_image"/>

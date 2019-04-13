@@ -82,6 +82,12 @@
     color: #f15323;
     font-weight: bold;
 }
+.shopList_container .sapMSLITitle {
+    display: none !important;
+}
+.listSaleItem_container .sapMSLITitle {
+    display: none !important;
+}
 .listShopItem_image {
     width: 80px;
     height: 80px;
@@ -250,12 +256,12 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     left: 15%;
 }
 .title_listShop {
-	display: block;
+    display: block;
     color: #f15323;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     white-space: normal;
-    padding: 10px;
+    padding: 10px 5px;
 }
 .findMoreColor {
     color: #d93025;
@@ -284,9 +290,9 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     border: none;
 }
 .border_full {
-	border: 2px solid #f15323;
-	border-radius: 5px;
-	margin: 10px;
+    border: 2px solid #f15323;
+    border-radius: 5px;
+    margin: 10px;
 }
 .border_bottom {
     border-bottom: 2px solid #f15323;
@@ -330,7 +336,7 @@ html.sap-desktop .sapMBtn:focus>.sapMFocusable {
     width: 50px;
 }
 .sapMLightBoxMagnifyingGlass {
-	display: none !important;
+    display: none !important;
 }
 .customShop_title {
     font-weight: bold;

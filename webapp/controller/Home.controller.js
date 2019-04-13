@@ -13,8 +13,6 @@ sap.ui.define([
 			var lng = this.getGlobalModel().getProperty("/lng");
 			this.getBestShop(lat, lng);
 			this.getBestSaleItem(lat, lng);
-			var userId = this.getGlobalModel().getProperty("/accountId");
-			this.getCountNoti(userId);
 		},
 
 		getBestShop: function(lat, lng) {
@@ -25,8 +23,9 @@ sap.ui.define([
 					results: getData
 				});
 				this.setModel(oModelShop, "oModelShop");
-				console.log(oModelShop);
 			}
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
 		},
 
 		getBestSaleItem: function(lat, lng) {

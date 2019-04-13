@@ -22,6 +22,8 @@ sap.ui.define([
 			var query = oEvent.getParameter("arguments").query;
 
 			this.getShopByQuery(query);
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
 		},
 
 		getShopByQuery: function(query) {

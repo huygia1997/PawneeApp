@@ -37,10 +37,10 @@
 					<!--		<core:Item key="5" text="{i18n>select_like}"/>-->
 					<!--	</items>-->
 					<!--</Select>-->
-					<VBox class="box_title_location">
+					<VBox width="100%" class="box_title_location">
 						<Title text="{i18n>title_items}" class="title_listShop"/>
 					</VBox>
-					<List id="ShopList" items="{oModelItem>/results}" class="shopList_container" growing="true" growingThreshold="7" growingScrollToLoad="true">
+					<List id="ShopList" items="{oModelItem>/results}" class="shopList_container" growing="true" growingThreshold="10" growingScrollToLoad="true">
 						<CustomListItem type="Navigation" press="navToItemDetail" class="listShopItem">
 							<HBox>
 								<Image src="{oModelItem>picUrl}" class="listShopItem_image"/>

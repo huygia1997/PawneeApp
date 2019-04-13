@@ -26,7 +26,6 @@ sap.ui.define([
 		 getAllNoti: function() {
 		 	var id = localStorage.getItem("uid");
 		 	var data = models.getNotifications(id);
-		 	 console.log(data);
 		 	if(data) {
 		 		var oModel = new JSONModel();
 				oModel.setData({

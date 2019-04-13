@@ -5,7 +5,7 @@ sap.ui.define([
 	'sap/m/MessageBox'
 ], function(BaseController, JSONModel, models, MessageBox) {
 	"use strict";
-	var gMap;
+	var gMap, markers;
 	return BaseController.extend("Mortgage-App.controller.RegisterShop", {
 		onInit: function() {
 			var oRouter = this.getRouter();
@@ -50,6 +50,8 @@ sap.ui.define([
 				// Browser doesn't support Geolocation
 				MessageBox.error("Trình duyệt của bạn không hỗ trợ Geolocation");
 			}
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
 		},
 
 		validatePhone: function() {
@@ -95,47 +97,63 @@ sap.ui.define([
 			var accountId = localStorage.getItem("uid");
 
 			if (this.checkRegister == true) {
-				var registerData = {
-					accountId: accountId,
-					shopName: shopName,
-					email: email,
-					phoneNumber: phone,
-					districtId: keyDistrict,
-					address: address,
-					longtitude: lng,
-					latitude: lat
-				};
-				var callback = models.registerShop(registerData);
-				if (callback == "success") {
-					MessageBox.success("Gửi đăng ký thành công! Hệ thống sẽ duyệt Cửa hàng của bạn!");
-				} else if (callback.status === 406) {
-					MessageBox.error("Tài khoản này đã được đăng ký thành chủ tiệm");
+				if (lat === "" && lng === "") {
+					MessageBox.error("Kéo Marker để có vị trí chính xác của Cửa hàng!");
 				} else {
-					MessageBox.error("Đăng kí thất bại!");
+					var registerData = {
+						accountId: accountId,
+						shopName: shopName,
+						email: email,
+						phoneNumber: phone,
+						districtId: keyDistrict,
+						address: address,
+						longtitude: lng,
+						latitude: lat
+					};
+					var callback = models.registerShop(registerData);
+					if (callback == "success") {
+						MessageBox.success("Gửi đăng ký thành công! Hệ thống sẽ duyệt Cửa hàng của bạn!");
+					} else if (callback.status === 406) {
+						MessageBox.error("Tài khoản này đã được đăng ký thành chủ tiệm");
+					} else {
+						MessageBox.error("Đăng kí thất bại!");
+					}
+					modelResiter.setProperty("/isPressing", false);
 				}
-				modelResiter.setProperty("/isPressing", false);
 			} else {
 				MessageBox.error("Kiểm tra lại thông tin!");
 				modelResiter.setProperty("/isPressing", false);
 			}
 		},
 
+		clearMarker: function() {
+			markers.setMap(null);
+		},
+
 		getLocationFromInput: function() {
+			this.clearMarker();
 			var that = this;
 			var getView = this.getView().byId("ip_address");
 			var getAddress = getView.getProperty("value");
+			var getCity = this.getView().byId("filterCity").getSelectedItem().getText();
+			var getDis = this.getView().byId("filterDistrict").getSelectedItem().getText();
+			var fullAddress = getAddress + ", " + getDis + "," + getCity;
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({
-				'address': getAddress
+				'address': fullAddress
 			}, function(results, status) {
 				if (status === 'OK') {
 					gMap.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({
+					markers = new google.maps.Marker({
 						map: gMap,
 						position: results[0].geometry.location,
 						draggable: true
 					});
-					that.getLatLng(marker);
+					var currentLatitude = markers.getPosition().lat();
+					var currentLongitude = markers.getPosition().lng();
+					that.getModel("modelRegister").setProperty("/lat", currentLatitude);
+					that.getModel("modelRegister").setProperty("/lng", currentLongitude);
+					that.getLatLng(markers);
 				} else {
 					MessageBox.error("Địa chỉ bạn nhập chưa đúng!");
 				}
@@ -156,10 +174,10 @@ sap.ui.define([
 		setLocation: function(lat, lng) {
 			var that = this;
 			var latLong = new google.maps.LatLng(lat, lng);
-			var shopName = that.getModel("modelRegister").getProperty("/shopName");
-			var content = "<h3>" + shopName + "</h3>";
+			var myEmail = this.getGlobalModel().getProperty("/username");
+			var content = "<h3>" + myEmail + "</h3>";
 
-			var marker = new google.maps.Marker({
+			markers = new google.maps.Marker({
 				position: latLong,
 				map: gMap,
 				draggable: true
@@ -167,19 +185,20 @@ sap.ui.define([
 			var infowindow = new google.maps.InfoWindow({
 				content: content
 			});
-			marker.addListener('click', function() {
-				infowindow.open(gMap, marker);
+			markers.addListener('click', function() {
+				infowindow.open(gMap, markers);
 			});
-			google.maps.event.addListener(marker, 'dragend', function(marker) {
+			google.maps.event.addListener(markers, 'dragend', function(marker) {
 				var latLng = marker.latLng;
-				// var currentLatitude = latLng.lat();
-				// var currentLongitude = latLng.lng();
-				// console.log(currentLatitude, currentLongitude);
+				var currentLatitude = latLng.lat();
+				var currentLongitude = latLng.lng();
+				that.getModel("modelRegister").setProperty("/lat", currentLatitude);
+				that.getModel("modelRegister").setProperty("/lng", currentLongitude);
 			});
-			marker.setMap(gMap);
+			markers.setMap(gMap);
 
-			gMap.setZoom(17);
-			gMap.setCenter(marker.getPosition());
+			gMap.setZoom(15);
+			gMap.setCenter(markers.getPosition());
 		},
 
 		getDataCity: function() {
@@ -192,7 +211,7 @@ sap.ui.define([
 				oModelCiti.updateBindings();
 			}
 			//get data district
-			var dataDistrict = models.getDataDistrict();
+			var dataDistrict = models.getDataDistrictRegister();
 			if (dataDistrict) {
 				var dataDis = [];
 				for (var i = 0; i < dataDistrict.length; i++) {

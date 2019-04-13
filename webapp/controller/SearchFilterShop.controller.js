@@ -37,7 +37,11 @@ sap.ui.define([
 			var oModelShop = new JSONModel();
 			this.setModel(oModelShop, "oModelShop");
 
+			this.getModel("keyOfDialog").setProperty("/isFiltering", 1);
+
 			this.getBestShop();
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
 
 		},
 
@@ -47,8 +51,6 @@ sap.ui.define([
 
 		getBestShop: function(page, sort) {
 			var oModelShop = this.getModel("oModelShop");
-			oModelShop.setData(null);
-			oModelShop.updateBindings();
 			// check was filter or sort
 			var check = this.getModel("keyOfDialog").getProperty("/isFiltering");
 			// get Model key filter
@@ -66,12 +68,13 @@ sap.ui.define([
 			} else if (check === 2) {
 				var dis = keyModel.getProperty("/keyDis");
 				var cate = keyModel.getProperty("/keyCate");
-				var dataFilterShop;
-				if (dis && cate) {
-					dataFilterShop = models.getShopByFilter(page, sort, cate, dis);
-				} else {
-					dataFilterShop = models.getShopByFilter(page, sort);
+				if (!dis) {
+					dis = 0;
 				}
+				if (!cate) {
+					cate = 0;
+				}
+				var dataFilterShop = models.getShopByFilter(page, sort, cate, dis);
 				if (dataFilterShop) {
 					oModelShop.setData({
 						results: dataFilterShop
@@ -80,12 +83,13 @@ sap.ui.define([
 			} else if (check === 3) {
 				var disFilter = keyModel.getProperty("/keyDis");
 				var cateFilter = keyModel.getProperty("/keyCate");
-				var dataSortShop;
-				if (disFilter && cateFilter) {
-					dataSortShop = models.getShopByFilter(page, sort, cateFilter, disFilter);
-				} else {
-					dataSortShop = models.getShopByFilter(page, sort);
+				if (!disFilter) {
+					disFilter = 0;
 				}
+				if (!cateFilter) {
+					cateFilter = 0;
+				}
+				var dataSortShop = models.getShopByFilter(page, sort, cateFilter, disFilter);
 				if (dataSortShop) {
 					oModelShop.setData({
 						results: dataSortShop
@@ -93,14 +97,6 @@ sap.ui.define([
 				}
 			}
 			arrayShop = oModelShop.getData();
-		},
-
-		loadMoreShop: function() {
-			pages++;
-			var sort = this.getModel("keyOfDialog").getProperty("/sort");
-			if (sort) {
-				this.getBestShop(pages, sort);
-			}
 		},
 
 		navToNearByLocation: function() {

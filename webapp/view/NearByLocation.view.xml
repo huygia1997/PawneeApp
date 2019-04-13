@@ -13,7 +13,7 @@
 				</customHeader>
 				<content>
 					<VBox>
-						<Button press="findMore" class="btn_location border_full" icon="sap-icon://sort" text="{i18n>btn_findMore}" width="41%"/>
+						<Button press="onfindMorePress" class="btn_location border_full" icon="sap-icon://sort" text="{i18n>btn_findMore}" width="41%"/>
 						<Title width="100%" text="{titleModel>/title}" class="title_listShop findMoreColor"/>
 					</VBox>
 					<HBox id="map_canvas" fitContainer="true" justifyContent="Center" alignItems="Center"></HBox>

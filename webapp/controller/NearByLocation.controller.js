@@ -6,7 +6,8 @@ sap.ui.define([
 	"use strict";
 
 	var gMap, dataLocation = [],
-		count = 0;
+		count = 0,
+		markers = [];
 	return BaseController.extend("Mortgage-App.controller.NearByLocation", {
 
 		onInit: function() {
@@ -20,12 +21,20 @@ sap.ui.define([
 		},
 
 		_onRouteMatched: function(oEvent) {
+			this.radius = 5;
 			this.lat = oEvent.getParameter("arguments").lat;
 			this.lng = oEvent.getParameter("arguments").lng;
 
 			this.getMyMarker(this.lat, this.lng);
 
 			this.getAllMarker(this.lat, this.lng);
+		},
+
+		clearMarker: function() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
 		},
 
 		getMyMarker: function(lat, lng) {
@@ -47,30 +56,39 @@ sap.ui.define([
 		},
 
 		getAllMarker: function(lat, lng, count) {
+			var radius = this.radius;
 			var titleModel = new JSONModel();
 			this.setModel(titleModel, "titleModel");
-			var data = models.getLocationNearBy(lat, lng);
-			if (!data) {
-				this.getModel("titleModel").setProperty("/title", "Không có Cửa hàng nào gần bạn!");
-			} else {
+			var data = models.getLocationNearBy(lat, lng, radius);
+			if (data) {
 				for (var i = 0; i < data.length; i++) {
 					dataLocation.push(data[i]);
 				}
 				this.createLocationShop(dataLocation, lat, lng);
+			} else {
+				this.getModel("titleModel").setProperty("/title", "Không có Cửa hàng nào gần bạn!");
 			}
 		},
 
 		createLocationShop: function(dataLocal, lat, lng) {
 			if (dataLocal !== null) {
 				for (var i = 0; i < dataLocal.length; i++) {
-					var list = dataLocal[i].address;
-					var latShop = list.latitude;
-					var lngShop = list.longtitude;
-
+					var latShop = dataLocal[i].latitude;
+					var lngShop = dataLocal[i].longtitude;
+					var address = dataLocal[i].address;
+					var fullAddress = address.fullAddress;
 					var shopName = dataLocal[i].shopName;
+					var shopId = dataLocal[i].id;
+					var avatarUrl = dataLocal[i].avatarUrl;
+					var data = {
+						fullAddress: fullAddress,
+						shopName: shopName,
+						shopId: shopId,
+						avatarUrl: avatarUrl
+					};
 					var distance = this.calculateDistance(latShop, lngShop, lat, lng);
 					if (distance <= 1000) {
-						this.getPositionOfMarker(latShop, lngShop, shopName);
+						this.getPositionOfMarker(latShop, lngShop, data);
 						this.getModel("titleModel").setProperty("/title", "Kết quả tìm kiếm 'gần đây 1km'");
 					} else {
 						this.getModel("titleModel").setProperty("/title", "Không có Cửa hàng nào gần 1km");
@@ -79,34 +97,54 @@ sap.ui.define([
 			}
 		},
 
-		getPositionOfMarker: function(lat, lng, shopName) {
+		getPositionOfMarker: function(lat, lng, data) {
 			var position = {
 				lat: lat,
 				lng: lng
 			};
-			this.addMarker(position, shopName);
+			this.addMarker(position, data);
 		},
 
-		findMore: function() {
+		onfindMorePress: function() {
+			if (count < 2) {
+				this.clearMarker();
+			}
 			count++;
+			if (count == 3) {
+				this.radius = 10;
+				this.getAllMarker(this.lat, this.lng);
+			}
 			for (var i = 0; i < dataLocation.length; i++) {
 				var list = dataLocation[i].address;
 				var latShop = list.latitude;
 				var lngShop = list.longtitude;
 				var shopName = dataLocation[i].shopName;
+				var shopId = dataLocation[i].id;
+				var avatarUrl = dataLocation[i].avatarUrl;
+				var data = {
+					fullAddress: list.fullAddress,
+					shopName: shopName,
+					shopId: shopId,
+					avatarUrl: avatarUrl
+				};
 				var distance = this.calculateDistance(latShop, lngShop, this.lat, this.lng);
 				if (count == 1) {
 					if (distance <= 3000) {
-						this.getPositionOfMarker(latShop, lngShop, shopName);
+						this.getPositionOfMarker(latShop, lngShop, data);
 						this.getModel("titleModel").setProperty("/title", "Kết quả tìm kiếm 'gần đây 3km'");
 					}
 				} else if (count == 2) {
 					if (distance <= 5000) {
-						this.getPositionOfMarker(latShop, lngShop, shopName);
+						this.getPositionOfMarker(latShop, lngShop, data);
 						this.getModel("titleModel").setProperty("/title", "Kết quả tìm kiếm 'gần đây 5km'");
 					}
+				} else if (count == 3) {
+					if (distance <= 10000) {
+						this.getPositionOfMarker(latShop, lngShop, data);
+						this.getModel("titleModel").setProperty("/title", "Kết quả tìm kiếm 'gần đây 10km'");
+					}
 				} else {
-					this.getModel("titleModel").setProperty("/title", "Chỉ tìm kiếm trong vòng bán kính 5km!");
+					this.getModel("titleModel").setProperty("/title", "Chỉ tìm kiếm trong vòng bán kính 10km!");
 				}
 			}
 		},
@@ -133,15 +171,22 @@ sap.ui.define([
 			return deg * (pi / 180);
 		},
 
-		addMarker: function(position, name) {
+		addMarker: function(position, data) {
 			var latLog = new google.maps.LatLng(position.lat, position.lng);
 			var marker = new google.maps.Marker({
 				position: latLog,
 				map: gMap,
 				animation: google.maps.Animation.DROP
 			});
+			markers.push(marker);
+			var avatarUrl = data.avatarUrl;
+			var shopName = data.shopName;
+			var fullAddress = data.fullAddress;
+			// var shopId = data.shopId;
+			var content = "<div><image class='custom-image-box' src=" + avatarUrl + " /><div class='custom-content-box'><h1>" + shopName +
+				"</h1><span>Địa chỉ: </span>" + fullAddress + "</span></div></div>";
 			var infowindow = new google.maps.InfoWindow({
-				content: name
+				content: content
 			});
 			marker.addListener('click', function() {
 				infowindow.open(gMap, marker);

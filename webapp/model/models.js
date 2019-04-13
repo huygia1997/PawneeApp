@@ -177,6 +177,25 @@ sap.ui.define([
 			});
 			return data;
 		},
+		
+		getDataDistrictRegister: function() {
+			var data;
+			var url = serverInfo.localUrl + "/dataDisRegister.json";
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+				},
+				error: function(e) {
+					data = e;
+				}
+			});
+			return data;
+		},
 
 		getDataCategory: function() {
 			var data;
@@ -203,13 +222,13 @@ sap.ui.define([
 			return data;
 		},
 
-		getLocationNearBy: function(lat, lng) {
+		getLocationNearBy: function(lat, lng, radius) {
 			var data;
 			var url;
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/location.json";
 			} else {
-				url = serverInfo.url + "/search/shops/nearby?lat=" + lat + "&lng=" + lng;
+				url = serverInfo.url + "/search/shops/nearby?lat=" + lat + "&lng=" + lng + "&radius=" + radius;
 			}
 			$.ajax({
 				type: "GET",
@@ -363,16 +382,7 @@ sap.ui.define([
 			if (serverInfo.useLocal) {
 				url = serverInfo.localUrl + "/shop.json";
 			} else {
-				if (cate && district) {
-					url = serverInfo.url + "/search/shops/listfilters?cate=" + cate + "&district=" + district + "&page=" + page + "&sort=" + sort;
-				} else if (!district) {
-					url = serverInfo.url + "/search/shops/listfilters?cate=" + cate + "&page=" + page + "&sort=" + sort;
-				} else if (!cate) {
-					url = serverInfo.url + "/search/shops/listfilters?district=" + district + "&page=" + page + "&sort=" + sort;
-				} else {
-					url = serverInfo.url + "/search/shops/listfilters?page=" + page + "&sort=" + sort;
-				}
-
+				url = serverInfo.url + "/search/shops/listfilters?cate=" + cate + "&district=" + district + "&page=" + page + "&sort=" + sort;
 			}
 			$.ajax({
 				type: "GET",
@@ -741,15 +751,27 @@ sap.ui.define([
 
 		getAllShopByFilterOfMap: function(cate, dis) {
 			var data, url;
-			if (cate !== "null" && dis === "null") {
-				url = serverInfo.url + "/search/shops/mapfilters?cate=" + cate;
-			} else if (cate === "null" && dis !== "null") {
-				url = serverInfo.url + "/search/shops/mapfilters?district=" + dis;
-			} else if (cate !== "null" && dis !== "null") {
-				url = serverInfo.url + "/search/shops/mapfilters?cate=" + cate + "&district=" + dis;
-			} else {
-				url = serverInfo.url + "/search/shops/mapfilters";
-			}
+			url = serverInfo.url + "/search/shops/mapfilters?cate=" + cate + "&district=" + dis;
+			$.ajax({
+				type: "GET",
+				url: url,
+				context: this,
+				dataType: 'json',
+				async: false,
+				success: function(d, r, xhr) {
+					data = d;
+				},
+				error: function(e) {
+					data = e;
+				}
+
+			});
+			return data;
+		},
+		
+		getNotiDetail: function(objId) {
+			var data, url;
+			url = serverInfo.url;
 			$.ajax({
 				type: "GET",
 				url: url,

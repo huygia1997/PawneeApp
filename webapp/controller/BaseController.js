@@ -180,6 +180,7 @@ sap.ui.define([
 		btnSearch: function() {
 			this.getRouter().navTo("searchShop");
 		},
+		
 		btnNoti: function() {
 			var oModelNoti = this.getModel("noti");
 			oModelNoti.setProperty("/count", "");

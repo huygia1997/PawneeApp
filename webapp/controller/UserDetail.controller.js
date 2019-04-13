@@ -14,12 +14,19 @@ sap.ui.define([
 		 * @memberOf Mortgage-App.view.Search
 		 */
 		onInit: function() {
+			var oRouter = this.getRouter();
 			var userId = this.getGlobalModel().getProperty("/accountId");
 			this.getCountNoti(userId);
 			var dataUser = new JSONModel();
 			this.setModel(dataUser, "dataUser");
 
 			this.getUserInfo();
+			oRouter.getRoute("userDetail").attachPatternMatched(this._onRouteMatched, this);
+		},
+
+		_onRouteMatched: function() {
+			var userId = this.getGlobalModel().getProperty("/accountId");
+			setInterval(this.getCountNoti(userId), 600000);
 		},
 
 		getUserInfo: function() {
@@ -62,7 +69,7 @@ sap.ui.define([
 			var getValueName = this.getView().byId("nameInput").getValue();
 			var getValuePhone = this.getView().byId("phoneInput").getValue();
 			var getValueAddress = this.getView().byId("addressInput").getValue();
-			
+
 			this.getModel("dataUser").setProperty("/name", getValueName);
 			this.getModel("dataUser").setProperty("/phone", getValuePhone);
 			this.getModel("dataUser").setProperty("/address", getValueAddress);
@@ -104,7 +111,7 @@ sap.ui.define([
 			var oModelNoti = this.getModel("noti");
 			oModelNoti.setProperty("/count", "");
 			oModelNoti.updateBindings(true);
-			
+
 			MessageBox.success("Đăng xuất thành công!");
 
 			this.getRouter().navTo("home");
@@ -179,7 +186,7 @@ sap.ui.define([
 		 * (NOT before the first rendering! onInit() is used for that one!).
 		 * @memberOf Mortgage-App.view.Search
 		 */
-			onBeforeRendering: function() {
+		onBeforeRendering: function() {
 
 		},
 
