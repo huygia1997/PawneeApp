@@ -200,75 +200,75 @@
 					"title": "{i18n>title}"
 				},
 				"searchFilterShop": {
-					"viewName": "searchFilterShop",
+					"viewName": "SearchFilterShop",
 					"viewId": "searchFilterShop"
 				},
 				"loginAndRegister": {
-					"viewName": "loginAndRegister",
+					"viewName": "LoginAndRegister",
 					"viewId": "loginAndRegister"
 				},
 				"registerPage": {
-					"viewName": "registerPage",
+					"viewName": "RegisterPage",
 					"viewId": "registerPage"
 				},
 				"loginPage": {
-					"viewName": "loginPage",
+					"viewName": "LoginPage",
 					"viewId": "loginPage"
 				},
 				"nearByLocation": {
-					"viewName": "nearByLocation",
+					"viewName": "NearByLocation",
 					"viewId": "nearByLocation"
 				},
 				"shopDetail": {
-					"viewName": "shopDetail",
+					"viewName": "ShopDetail",
 					"viewId": "shopDetail"
 				},
 				"searchShop": {
-					"viewName": "searchShop",
+					"viewName": "SearchShop",
 					"viewId": "searchShop"
 				},
 				"searchItem": {
-					"viewName": "searchItem",
+					"viewName": "SearchItem",
 					"viewId": "searchItem"
 				},
 				"userDetail": {
-					"viewName": "userDetail",
+					"viewName": "UserDetail",
 					"viewId": "userDetail"
 				},
 				"resultSearchShop": {
-					"viewName": "resultSearchShop",
+					"viewName": "TesultSearchShop",
 					"viewId": "resultSearchShop"
 				},
 				"notification": {
-					"viewName": "notification",
+					"viewName": "Notification",
 					"viewId": "notification"
 				},
 				"notificationDetail": {
-					"viewName": "notificationDetail",
+					"viewName": "NotificationDetail",
 					"viewId": "notificationDetail"
 				},
 				"resultSearchItem": {
-					"viewName": "resultSearchItem",
+					"viewName": "ResultSearchItem",
 					"viewId": "resultSearchItem"
 				},
 				"searchFilterItem": {
-					"viewName": "searchFilterItem",
+					"viewName": "SearchFilterItem",
 					"viewId": "searchFilterItem"
 				},
 				"itemDetail": {
-					"viewName": "itemDetail",
+					"viewName": "ItemDetail",
 					"viewId": "itemDetail"
 				},
 				"activate": {
-					"viewName": "activate",
+					"viewName": "Activate",
 					"viewId": "activate"
 				},
 				"registerShop": {
-					"viewName": "registerShop",
+					"viewName": "RegisterShop",
 					"viewId": "registerShop"
 				},
 				"findShopByMap": {
-					"viewName": "findShopByMap",
+					"viewName": "FindShopByMap",
 					"viewId": "findShopByMap"
 				}
 			}
